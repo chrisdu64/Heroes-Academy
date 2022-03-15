@@ -9,6 +9,7 @@ import { DetailComponent } from './protected/detail/detail.component';
 import { HeroesListComponent } from './protected/heroes-list/heroes-list.component';
 import { HomeComponent } from './public/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FindPipe } from './shared/pipes/find.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     DetailComponent,
     HeroesListComponent,
     HomeComponent,
+    FindPipe,
   ],
   imports: [
     BrowserModule,

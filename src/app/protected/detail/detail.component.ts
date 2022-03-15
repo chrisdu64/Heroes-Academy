@@ -12,9 +12,9 @@ import { HeroesDtoService } from 'src/app/core/services/heroes-dto.service';
 })
 export class DetailComponent implements OnInit, OnDestroy {
 
-  heroesDto!: HeroDto[] | null;
-  heroDto!: HeroDto;
-  // sub!: Subscription;
+  subHeroesDto!: Subscription;
+  heroDto!: HeroDto | undefined;
+  heroId!: number;
 
   constructor(
     private heroesDtoService: HeroesDtoService,
@@ -23,26 +23,17 @@ export class DetailComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    const heroId = +this.route.snapshot.params['id'];
-    console.log("le id:", heroId);
-    this.heroesDto = this.heroesDtoService.getHeroesDto();
+    this.heroId = +this.route.snapshot.params['id'];
 
-    if (this.heroesDto && heroId) {
-
-      for (let i = 0, hL = this.heroesDto?.length; i < hL; i++) {
-        if (this.heroesDto[i].id === heroId) {
-          this.heroDto = this.heroesDto[i];
-        }
-      }
-    }
-
-    console.log('this.heroDto', this.heroDto);
-
-    // this.sub = this.hero$.subscribe(hero => this.hero = hero);
+    this.subHeroesDto = this.heroesDtoService.getHeroesDto$().subscribe(
+      heroesDto => this.heroDto = heroesDto.find(
+        heroDto => heroDto.id === this.heroId
+      )
+    );
   }
 
   ngOnDestroy(): void {
-    // this.sub.unsubscribe();
+    this.subHeroesDto.unsubscribe();
   }
 
   onReturn() {
