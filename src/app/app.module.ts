@@ -10,6 +10,10 @@ import { HeroesListComponent } from './protected/heroes-list/heroes-list.compone
 import { HomeComponent } from './public/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FindPipe } from './shared/pipes/find.pipe';
+import { PageNotFoundComponent } from './core/component/404-error/page-not-found.component';
+import { NewAbilityComponent } from './protected/new-ability/new-ability.component';
+import { NewTechniqueComponent } from './protected/new-technique/new-technique.component';
+import { NewHeroComponent } from './protected/new-hero/new-hero.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +23,10 @@ import { FindPipe } from './shared/pipes/find.pipe';
     HeroesListComponent,
     HomeComponent,
     FindPipe,
+    PageNotFoundComponent,
+    NewAbilityComponent,
+    NewTechniqueComponent,
+    NewHeroComponent
   ],
   imports: [
     BrowserModule,
