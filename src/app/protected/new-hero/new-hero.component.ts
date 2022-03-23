@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Hero } from 'src/app/core/models/hero.interface';
+import { HeroesService } from 'src/app/core/services/heroes.service';
 
 @Component({
   selector: 'app-new-hero',
@@ -15,7 +17,11 @@ export class NewHeroComponent implements OnInit {
   newHero$!: Observable<Hero>;
   urlVerify!: RegExp;
 
-  constructor(private formBuiler: FormBuilder) { }
+  constructor(
+    private formBuiler: FormBuilder,
+    // private heroesDtoService: HeroesDtoService,
+    private heroesService: HeroesService,
+    private router: Router) { }
 
   ngOnInit(): void {
 
@@ -36,9 +42,10 @@ export class NewHeroComponent implements OnInit {
     )
   }
 
-  onSubmitForm() {
-    console.log(this.heroForm.value);
-
+  onSubmitHeroForm() {
+    this.heroesService.addHero$(this.heroForm.value).pipe(
+      tap(() => this.router.navigateByUrl('heroes'))
+    ).subscribe();
   }
 
 }

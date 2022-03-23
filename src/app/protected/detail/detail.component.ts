@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { delay, map, tap } from 'rxjs/operators';
 import { HeroDto } from 'src/app/core/models/heroDto.interface';
+import { AbilitiesService } from 'src/app/core/services/abilities.service';
 import { HeroesDtoService } from 'src/app/core/services/heroes-dto.service';
 
 @Component({
@@ -20,11 +21,14 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   constructor(
     private heroesDtoService: HeroesDtoService,
+    private abilitiesService: AbilitiesService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    // const heroId = +this.route.snapshot.params['id'];
+    // this.heroDto$ = this.heroesDtoService.getHeroesDtoById$(heroId);
     this.heroId = +this.route.snapshot.params['id'];
 
     this.heroDto$ = this.heroesDtoService.getHeroesDto$().pipe(
@@ -45,9 +49,19 @@ export class DetailComponent implements OnInit, OnDestroy {
     // this.subHeroesDto.unsubscribe();
   }
 
-  onReturn() {
+  onReturn(): void {
     this.router.navigateByUrl('heroes');
   }
 
+  onCreateNewTechnique(id: number): void {
+    this.router.navigateByUrl(`create/technique/${id}`);
+
+  }
+
+  // onDelete(id: number): void {
+  //   this.abilitiesService.deleteAbility$(id).pipe(
+  //     tap(() => this.router.navigateByUrl("heroes"))
+  //   )
+  // }
 
 }

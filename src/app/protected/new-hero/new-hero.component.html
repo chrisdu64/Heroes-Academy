@@ -23,7 +23,7 @@
         class="btn btn-outline-dark d-block"
         style="margin: 20px auto"
         type="submit"
-        (click)="onSubmitForm()"
+        (click)="onSubmitHeroForm()"
         [disabled]="heroForm.invalid"
       >
         Enregistrer
@@ -31,8 +31,8 @@
     </div>
   </form>
 </div>
-<div class="hero-card" *ngIf="newHero$ | async as hero">
+<!-- <div class="hero-card" *ngIf="newHero$ | async as hero">
   <h2>{{ hero.name | uppercase }}</h2>
   <img class="w-100" [src]="hero.myImg" [alt]="hero.name" />
   <p>{{ hero.description }}</p>
-</div>
+</div> -->

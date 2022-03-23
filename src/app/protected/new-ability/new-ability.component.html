@@ -1,1 +1,26 @@
-<p>new-ability works!</p>
+<div class="form-card">
+  <h2 class="text-center my-3">Nouvelle capacité :</h2>
+  <form [formGroup]="abilityForm">
+    <div class="form-group">
+      <label for="name">Nom de la capacité :</label>
+      <input type="text" id="name" formControlName="name" />
+    </div>
+    <div class="w-100">
+      <button
+        class="btn btn-outline-dark d-block"
+        style="margin: 20px auto"
+        type="submit"
+        (click)="onSubmitAbilityForm()"
+        [disabled]="abilityForm.invalid"
+      >
+        Enregistrer
+      </button>
+    </div>
+  </form>
+  <button
+    class="btn btn-warning text-white"
+    [routerLink]="['/heroes/', heroId]"
+  >
+    Retour sur le héros
+  </button>
+</div>

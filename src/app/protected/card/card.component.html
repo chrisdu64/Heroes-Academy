@@ -14,36 +14,58 @@
         </p>
       </div>
       <div class="card-body">
-        <h4 class="list-group-item text-uppercase fw-bold text-success">
-          Capacités :
-        </h4>
-        <h6 class="list-group-item text-uppercase fw-bold text-center">
-          Nombre de capacités :
-          <span class="text-warning">{{ numberOfAbilities }}</span>
-        </h6>
-        <ul class="list-group">
-          <li
-            class="list-group-item"
-            *ngFor="let abilities of heroDto.abilities | slice: 0:1"
+        <ng-container *ngIf="heroDto.abilities.length !== 0; else newAbility">
+          <h4 class="list-group-item text-uppercase fw-bold text-success">
+            Capacités :
+          </h4>
+          <h6 class="list-group-item text-uppercase fw-bold text-center">
+            Nombre de capacités :
+            <span class="text-warning">{{ numberOfAbilities }}</span>
+          </h6>
+          <ul class="list-group">
+            <li
+              class="list-group-item"
+              *ngFor="let abilities of heroDto.abilities | slice: 0:1"
+            >
+              {{ abilities.name + " ... " }}
+            </li>
+          </ul>
+        </ng-container>
+        <ng-template #newAbility>
+          <button
+            [routerLink]="['/create/ability', heroDto.id]"
+            class="w-100 btn btn-success"
           >
-            {{ abilities.name + " ... " }}
-          </li>
-        </ul>
-        <h4 class="list-group-item text-uppercase fw-bold text-info">
-          Techniques :
-        </h4>
-        <h6 class="list-group-item text-uppercase fw-bold text-center">
-          Nombre de techniques :
-          <span class="text-warning">{{ numberOfTechniques }}</span>
-        </h6>
-        <ul class="list-group">
-          <li
-            class="list-group-item"
-            *ngFor="let techniques of heroDto.techniques | slice: 0:1"
+            Nouvelle capacité :
+          </button>
+        </ng-template>
+        <ng-container
+          *ngIf="heroDto.techniques.length !== 0; else newTechnique"
+        >
+          <h4 class="list-group-item text-uppercase fw-bold text-info">
+            Techniques :
+          </h4>
+          <h6 class="list-group-item text-uppercase fw-bold text-center">
+            Nombre de techniques :
+            <span class="text-warning">{{ numberOfTechniques }}</span>
+          </h6>
+          <ul class="list-group">
+            <li
+              class="list-group-item"
+              *ngFor="let techniques of heroDto.techniques | slice: 0:1"
+            >
+              {{ (techniques.name | slice: 0:20) + " ... " }}
+            </li>
+          </ul>
+        </ng-container>
+        <ng-template #newTechnique>
+          <button
+            [routerLink]="['/create/technique', heroDto.id]"
+            class="w-100 btn btn-info text-white"
           >
-            {{ (techniques.name | slice: 0:20) + " ... " }}
-          </li>
-        </ul>
+            Nouvelle technique :
+          </button>
+        </ng-template>
       </div>
 
       <button

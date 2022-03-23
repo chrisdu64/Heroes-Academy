@@ -7,5 +7,7 @@
   { "id": 6, "heroId": 2, "name": "Maîtrise du feu" },
   { "id": 7, "heroId": 2, "name": "Maîtrise de la foudre" },
   { "id": 8, "heroId": 3, "name": "Soin" },
-  { "id": 9, "heroId": 3, "name": "Force exceptionnelle" }
+  { "id": 9, "heroId": 3, "name": "Force exceptionnelle" },
+  { "id": 10, "heroId": 4, "name": "sharingan" },
+  { "id": 11, "heroId": 4, "name": "Maîtrise de la foudre" }
 ]

@@ -12,8 +12,8 @@ const routes: Routes = [
   { path: 'heroes', component: HeroesListComponent },
   { path: 'heroes/:id', component: DetailComponent },
   { path: 'create/hero', component: NewHeroComponent },
-  { path: 'create/ability', component: NewAbilityComponent },
-  { path: 'create/technique', component: NewTechniqueComponent },
+  { path: 'create/ability/:id', component: NewAbilityComponent },
+  { path: 'create/technique/:id', component: NewTechniqueComponent },
   { path: '', component: HomeComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
