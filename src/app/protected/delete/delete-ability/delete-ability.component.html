@@ -1,0 +1,42 @@
+<ng-container
+  *ngIf="abilities$ | async as abilities; then abilityTemplate; else loader"
+></ng-container>
+<ng-template #abilityTemplate let-abilities>
+  <div class="card-body">
+    <h4
+      class="list-group-item text-uppercase fw-bold text-white bg-success text-center mx-auto w-75 my-4"
+    >
+      Capacités :
+    </h4>
+    <div class="w-50 mx-auto">
+      <ul class="list-group">
+        <li
+          class="list-group-item d-flex justify-content-between"
+          *ngFor="let ability of abilities"
+        >
+          {{ ability.name }}
+          <button
+            class="btn btn-outline-danger"
+            (click)="onDeleteAbility(ability.id)"
+          >
+            Supprimer
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body d-flex justify-content-center">
+      <button
+        class="w-25 btn btn-secondary"
+        [routerLink]="['/heroes/', heroId]"
+      >
+        Retour
+      </button>
+    </div>
+  </div>
+</ng-template>
+<ng-template #loader let-abilities>
+  <img
+    src="https://static.tutoandco.colas-delmas.fr/uploads/2017/10/loader.gif"
+    alt=""
+  />
+</ng-template>

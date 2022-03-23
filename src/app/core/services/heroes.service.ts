@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { concatMap, map, switchMap, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Hero } from '../models/hero.interface';
 // import { AbilitiesService } from './abilities.service';
@@ -18,12 +19,29 @@ export class HeroesService {
 
   constructor(private http: HttpClient) { }
 
-  getHeroes(): Observable<Hero[]> {
+  getHeroes$(): Observable<Hero[]> {
     return this.http.get<Hero[]>(environment.apiUrl + '/heroes');
   }
 
-  getHeroesById(id: number): Observable<Hero> {
+  getHeroesById$(id: number): Observable<Hero> {
     return this.http.get<Hero>(environment.apiUrl + "/heroes/" + id)
+  }
+
+  addHero$(formValue: { name: string, description: string, myImg: string }): Observable<Hero> {
+
+    return this.getHeroes$().pipe(
+      map(heroes => [...heroes].sort((a: Hero, b: Hero) => a.id - b.id)),
+      tap(r => console.log("le R1: ", r)),
+      map(sortedHeroes => sortedHeroes[sortedHeroes.length - 1]),
+      tap(r => console.log("le R2: ", r)),
+      map(previousHero => ({
+        ...formValue,
+        id: previousHero.id + 1
+      })),
+      tap(r => console.log("le R3: ", r)),
+      switchMap(newHero => this.http.post<Hero>(environment.apiUrl + "/heroes/", newHero)),
+      tap(r => console.log("le R4: ", r))
+    )
   }
 
   // getHeroesById(heroId: number): Hero {

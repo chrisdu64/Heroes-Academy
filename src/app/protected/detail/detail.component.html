@@ -1,26 +1,66 @@
-<ng-container *ngIf="heroDto; then heroDtoTemplate; else loader">
+<ng-container
+  *ngIf="heroDto$ | async as heroDto; then heroDtoTemplate; else loader"
+>
 </ng-container>
 
 <ng-template #heroDtoTemplate let-heroDto>
-  <div class="card mx-auto" style="width: 18rem; height: 600px">
+  <div class="card mx-auto mb-3" style="width: 60%; height: auto">
     <img
       [src]="heroDto.myImg"
       class="card-img-top"
-      style="height: 200px"
+      style="height: auto"
       [alt]="heroDto.name"
     />
     <div class="card-body">
-      <h5 class="card-title">{{ heroDto.name }}</h5>
+      <h3 class="card-title text-center fw-bold">
+        {{ heroDto.name | uppercase }}
+      </h3>
       <p class="card-text">{{ heroDto.description }}</p>
     </div>
     <div class="card-body">
-      <h4 class="list-group-item text-uppercase fw-bold">Capacités :</h4>
+      <h4
+        class="list-group-item text-uppercase fw-bold text-white bg-success text-center mx-auto"
+      >
+        Capacités :
+      </h4>
+      <div class="d-flex justify-content-around">
+        <button
+          [routerLink]="['/create/ability', heroDto.id]"
+          class="w-25 btn btn-outline-success"
+        >
+          Nouvelles capacités :
+        </button>
+        <button
+          [routerLink]="['/delete/ability', heroDto.id]"
+          class="w-25 btn btn-outline-danger"
+        >
+          Supprimer une capacité :
+        </button>
+      </div>
       <ul class="list-group">
         <li class="list-group-item" *ngFor="let abilities of heroDto.abilities">
           {{ abilities.name }}
         </li>
       </ul>
-      <h4 class="list-group-item text-uppercase fw-bold">Techniques :</h4>
+      <h4
+        class="list-group-item text-uppercase fw-bold text-center text-white mt-2 bg-info"
+      >
+        Techniques :
+      </h4>
+      <div class="d-flex justify-content-around">
+        <button
+          (click)="onCreateNewTechnique(heroDto.id)"
+          class="w-25 btn btn-outline-info"
+        >
+          Nouvelles techniques :
+        </button>
+        <button
+          (click)="onDeleteTechnique(heroDto.id)"
+          class="w-25 btn btn-outline-danger"
+        >
+          Supprimer une technique :
+        </button>
+      </div>
       <ul class="list-group">
         <li
           class="list-group-item"
@@ -30,13 +70,22 @@
         </li>
       </ul>
     </div>
-    <div class="card-body">
-      <a href="#" class="card-link">Nouvelles capacités :</a>
-      <a href="#" class="card-link">Nouvelles techniques :</a>
-      <button (click)="onReturn()">Retour</button>
+    <div class="card-body w-100 d-flex justify-content-center">
+      <button class="w-50 btn btn-secondary" (click)="onReturn()">
+        Retour
+      </button>
+      <!-- <button
+        class="w-25 btn btn-secondary"
+        (click)="onDelete(heroDto.abilities.id)"
+      >
+        Effacer une capacité
+      </button> -->
     </div>
   </div>
 </ng-template>
-<ng-template #loader>
-  <p>Nop, pas de héros</p>
+<ng-template #loader let-heroDto>
+  <img
+    src="https://static.tutoandco.colas-delmas.fr/uploads/2017/10/loader.gif"
+    alt=""
+  />
 </ng-template>

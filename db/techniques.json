@@ -13,5 +13,6 @@
   },
   { "id": 9, "heroId": 3, "name": "Explosion de la fleur de cerisier" },
   { "id": 10, "heroId": 3, "name": "Rupture du sceau" },
-  { "id": 11, "heroId": 3, "name": "La puissance des Cent" }
+  { "id": 11, "heroId": 3, "name": "La puissance des Cent" },
+  { "id": 12, "heroId": 4, "name": "L'escouade des crocs" }
 ]

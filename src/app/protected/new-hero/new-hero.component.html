@@ -1,0 +1,38 @@
+<div class="form-card">
+  <h2 class="text-center my-3">Nouveau Héros</h2>
+  <form [formGroup]="heroForm">
+    <div class="form-group">
+      <label for="name">Nom du héros</label>
+      <input type="text" id="name" formControlName="name" />
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        type="text"
+        id="description"
+        formControlName="description"
+        rows="4"
+      ></textarea>
+    </div>
+    <div class="form-group">
+      <label for="myImg">URL de l'image</label>
+      <input type="text" id="myImg" formControlName="myImg" />
+    </div>
+    <div class="w-100">
+      <button
+        class="btn btn-outline-dark d-block"
+        style="margin: 20px auto"
+        type="submit"
+        (click)="onSubmitHeroForm()"
+        [disabled]="heroForm.invalid"
+      >
+        Enregistrer
+      </button>
+    </div>
+  </form>
+</div>
+<!-- <div class="hero-card" *ngIf="newHero$ | async as hero">
+  <h2>{{ hero.name | uppercase }}</h2>
+  <img class="w-100" [src]="hero.myImg" [alt]="hero.name" />
+  <p>{{ hero.description }}</p>
+</div> -->
