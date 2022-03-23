@@ -1,0 +1,42 @@
+<ng-container
+  *ngIf="techniques$ | async as techniques; then techniqueTemplate; else loader"
+></ng-container>
+<ng-template #techniqueTemplate let-techniques>
+  <div class="card-body">
+    <h4
+      class="list-group-item text-uppercase fw-bold text-white bg-info text-center mx-auto w-75 my-4"
+    >
+      Techniques :
+    </h4>
+    <div class="w-50 mx-auto">
+      <ul class="list-group">
+        <li
+          class="list-group-item d-flex justify-content-between"
+          *ngFor="let technique of techniques"
+        >
+          {{ technique.name }}
+          <button
+            class="btn btn-outline-danger"
+            (click)="onDeleteTechnique(technique.id)"
+          >
+            Supprimer
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body d-flex justify-content-center">
+      <button
+        class="w-25 btn btn-secondary"
+        [routerLink]="['/heroes/', heroId]"
+      >
+        Retour
+      </button>
+    </div>
+  </div>
+</ng-template>
+<ng-template #loader let-techniques>
+  <img
+    src="https://static.tutoandco.colas-delmas.fr/uploads/2017/10/loader.gif"
+    alt=""
+  />
+</ng-template>

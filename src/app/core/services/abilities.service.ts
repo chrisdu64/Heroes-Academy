@@ -45,7 +45,10 @@ export class AbilitiesService {
   }
 
   // deleteAbility$(heroId: number): Observable<Ability> {
-  //   return this.http.delete<Ability>(environment.apiUrl + "/abilities?heroId=" + heroId)
+  //   return this.getAbilities$().pipe(
+  //     map(abilities => [...abilities]. )
+  //   )
+  //  return this.http.delete<Ability>(environment.apiUrl + "/abilities?heroId=" + heroId)
   // }
 
   // lengthAbilities(heroId: number): number {

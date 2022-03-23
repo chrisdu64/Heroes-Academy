@@ -14,6 +14,10 @@ import { PageNotFoundComponent } from './core/component/404-error/page-not-found
 import { NewAbilityComponent } from './protected/new-ability/new-ability.component';
 import { NewTechniqueComponent } from './protected/new-technique/new-technique.component';
 import { NewHeroComponent } from './protected/new-hero/new-hero.component';
+import { DeletePageComponent } from './public/delete-page/delete-page.component';
+import { DeleteAbilityComponent } from './protected/delete/delete-ability/delete-ability.component';
+import { DeleteTechniqueComponent } from './protected/delete/delete-technique/delete-technique.component';
+import { FilterPipe } from './shared/pipes/filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +30,11 @@ import { NewHeroComponent } from './protected/new-hero/new-hero.component';
     PageNotFoundComponent,
     NewAbilityComponent,
     NewTechniqueComponent,
-    NewHeroComponent
+    NewHeroComponent,
+    DeletePageComponent,
+    DeleteAbilityComponent,
+    DeleteTechniqueComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

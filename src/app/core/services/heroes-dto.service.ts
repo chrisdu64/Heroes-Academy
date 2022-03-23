@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { HeroDto } from '../models/heroDto.interface';
 import { AbilitiesService } from './abilities.service';
@@ -44,6 +44,14 @@ export class HeroesDtoService {
     };
     return this.heroesDto$;
   }
+
+  getHeroesDtoBySearchTerm$(searchTerm: string): Observable<HeroDto[]> {
+    return this.getHeroesDto$().pipe(
+      map(heroesDto => heroesDto.filter(heroDto => heroDto.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      ))
+  }
+
 
   // addHeroDto$(formValue: { name: string, description: string, myImg: string }): Observable<HeroDto> {
 

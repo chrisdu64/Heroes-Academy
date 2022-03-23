@@ -67,13 +67,22 @@
           </button>
         </ng-template>
       </div>
-
-      <button
-        class="btn btn-outline-secondary w-50 m-auto"
-        routerLink="{{ heroDto.id }}"
-      >
-        Détails
-      </button>
+      <div class="card-body w-100 d-flex justify-content-between">
+        <button
+          class="btn btn-outline-secondary"
+          style="width: 40%"
+          routerLink="{{ heroDto.id }}"
+        >
+          Détails
+        </button>
+        <button
+          class="btn btn-outline-danger"
+          style="width: 40%"
+          (click)="onDeleteHero(heroDto.id)"
+        >
+          Supprimer
+        </button>
+      </div>
     </div>
   </div>
 </ng-container>

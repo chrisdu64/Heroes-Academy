@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { delay, map, tap } from 'rxjs/operators';
 import { HeroDto } from 'src/app/core/models/heroDto.interface';
-import { AbilitiesService } from 'src/app/core/services/abilities.service';
 import { HeroesDtoService } from 'src/app/core/services/heroes-dto.service';
 
 @Component({
@@ -15,13 +14,12 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   // subHeroesDto!: Subscription;
   heroDto!: HeroDto | undefined;
-  heroesDto$!: Observable<HeroDto[]>;
+  // heroesDto$!: Observable<HeroDto[]>;
   heroDto$!: Observable<HeroDto | undefined>;
   heroId!: number;
 
   constructor(
     private heroesDtoService: HeroesDtoService,
-    private abilitiesService: AbilitiesService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -55,13 +53,10 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   onCreateNewTechnique(id: number): void {
     this.router.navigateByUrl(`create/technique/${id}`);
-
   }
 
-  // onDelete(id: number): void {
-  //   this.abilitiesService.deleteAbility$(id).pipe(
-  //     tap(() => this.router.navigateByUrl("heroes"))
-  //   )
-  // }
+  onDeleteTechnique(id: number): void {
+    this.router.navigateByUrl(`delete/technique/${id}`);
+  }
 
 }
