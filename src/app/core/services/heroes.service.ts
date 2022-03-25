@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { concatMap, map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Hero } from '../models/hero.interface';
 // import { AbilitiesService } from './abilities.service';
@@ -40,6 +40,7 @@ export class HeroesService {
     )
   }
 
+}
   // getHeroesById(heroId: number): Hero {
   //   const hero = this.heroes.find(hero => hero.id === heroId);
   //   if (!hero) {
@@ -119,5 +120,4 @@ export class HeroesService {
 
   // Obtenir l'id //
 
-}
 

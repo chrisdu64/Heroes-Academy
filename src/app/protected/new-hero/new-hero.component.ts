@@ -19,7 +19,6 @@ export class NewHeroComponent implements OnInit {
 
   constructor(
     private formBuiler: FormBuilder,
-    // private heroesDtoService: HeroesDtoService,
     private heroesService: HeroesService,
     private router: Router) { }
 

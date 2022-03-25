@@ -41,6 +41,7 @@ export class TechniquesService {
       switchMap(newTechnique => this.http.post<Technique>(environment.apiUrl + "/techniques/", newTechnique))
     )
   }
+}
 
   // getTechniquesByHeroId(heroId: number): Observable<Technique[]> {
 
@@ -50,4 +51,3 @@ export class TechniquesService {
   // getTechniques(): Technique[] {
   //   return this.techniques;
   // }
-}

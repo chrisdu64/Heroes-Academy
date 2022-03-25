@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -21,8 +20,7 @@ export class HeroesDtoService {
   constructor(
     private heroesService: HeroesService,
     private abilitiesService: AbilitiesService,
-    private techniquesService: TechniquesService,
-    private http: HttpClient
+    private techniquesService: TechniquesService
   ) { }
 
   setHeroesDto$(): void {
@@ -43,7 +41,8 @@ export class HeroesDtoService {
     };
     return this.heroesDto$;
   }
-  getHeroesBySearchTerm$(searchTerm: string): Observable<HeroDto[]> {
+
+  getHeroesDtoBySearchTerm$(searchTerm: string): Observable<HeroDto[]> {
     return this.getHeroesDto$().pipe(
       map(heroesDto => heroesDto.filter(
         heroDto => heroDto.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -54,7 +53,7 @@ export class HeroesDtoService {
             technique => technique.name.toLowerCase().includes(searchTerm.toLowerCase())
           )
       ))
-    )
+    );
   }
 
 

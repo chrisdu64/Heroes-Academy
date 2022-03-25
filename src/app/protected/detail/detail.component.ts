@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { delay, map, tap } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 import { HeroDto } from 'src/app/core/models/heroDto.interface';
 import { HeroesDtoService } from 'src/app/core/services/heroes-dto.service';
 
