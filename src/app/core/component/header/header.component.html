@@ -15,22 +15,31 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="heroes"
-            >Héros</a
+          <button
+            class="btn btn-outline-secondary ms-5"
+            aria-current="page"
+            routerLink="heroes"
           >
+            Héros
+          </button>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" routerLink="create/hero">Nouveau héros</a>
+          <button class="btn btn-outline-success ms-3" routerLink="create/hero">
+            Nouveau héros
+          </button>
         </li>
       </ul>
-      <div>
+      <div class="w-50 d-flex">
         <input
-          type="text"
-          placeholder="Cherche ton héros !!"
+          class="me-3 w-75"
+          type="search"
+          placeholder="Héros, capacité ou technique !!"
           [(ngModel)]="searchTerm"
           (change)="search()"
         />
-        <button (click)="search()">Search</button>
+        <button (click)="search()" class="btn btn-outline-success">
+          Rechercher
+        </button>
       </div>
       <!-- <form class="d-flex">
         <input

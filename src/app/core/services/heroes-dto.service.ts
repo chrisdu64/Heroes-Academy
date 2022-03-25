@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
 import { HeroDto } from '../models/heroDto.interface';
 import { AbilitiesService } from './abilities.service';
 import { HeroesService } from './heroes.service';
@@ -44,28 +43,82 @@ export class HeroesDtoService {
     };
     return this.heroesDto$;
   }
-
-  getHeroesDtoBySearchTerm$(searchTerm: string): Observable<HeroDto[]> {
+  getHeroesBySearchTerm$(searchTerm: string): Observable<HeroDto[]> {
     return this.getHeroesDto$().pipe(
-      map(heroesDto => heroesDto.filter(heroDto => heroDto.name.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+      map(heroesDto => heroesDto.filter(
+        heroDto => heroDto.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          heroDto.abilities.some(
+            ability => ability.name.toLowerCase().includes(searchTerm.toLowerCase())
+          ) ||
+          heroDto.techniques.some(
+            technique => technique.name.toLowerCase().includes(searchTerm.toLowerCase())
+          )
       ))
+    )
   }
 
 
-  // addHeroDto$(formValue: { name: string, description: string, myImg: string }): Observable<HeroDto> {
+  // getHeroesDtoByHeroDtoName$(heroDtoName: string): Observable<HeroDto[]> {
+  //   return this.getHeroesDto$().pipe(
+  //     map(heroesDto => heroesDto.filter(
+  //       heroDto => heroDto.name.toLowerCase().includes(heroDtoName.toLowerCase()))
+  //     ));
+  // }
+
+  // getHeroesDtoByAbilityName$(abilityName: string): Observable<HeroDto[]> {
+  //   console.log("le truc quon tape:", abilityName);
 
   //   return this.getHeroesDto$().pipe(
-  //     map(heroesDto => [...heroesDto].sort((a: HeroDto, b: HeroDto) => a.id - b.id)),
-  //     map(sortedHeroesDto => sortedHeroesDto[sortedHeroesDto.length - 1]),
-  //     map(previousHeroDto => ({
-  //       ...formValue,
-  //       id: previousHeroDto.id + 1,
-  //       abilities: previousHeroDto.abilities = [],
-  //       techniques: previousHeroDto.techniques = []
-  //     })),
-  //     switchMap(newHeroDto => this.http.post<HeroDto>(environment.apiUrl + "heroes", newHeroDto))
+  //     map(heroesDto => heroesDto.filter(
+  //       heroDto => heroDto.abilities.some(
+  //         ability => ability.name.toLowerCase().includes(abilityName.toLowerCase())
+  //       )
+  //     ))
   //   )
+  // }
+
+  // getHeroesDtoByTechniqueName$(techniqueName: string): Observable<HeroDto[]> {
+  //   return this.getHeroesDto$().pipe(
+  //     map(heroesDto => heroesDto.filter(
+  //       heroDto => heroDto.techniques.some(
+  //         technique => technique.name.toLowerCase().includes(techniqueName.toLowerCase())
+  //       )
+  //     ))
+  //   )
+  // }
+
+
+  //   return forkJoin([this.heroesDto$, this.abilities$, this.techniques$]).pipe(
+  //     map(([heroesDto, abilities, techniques]) =>
+  //       heroesDto.filter(heroDto => ({
+  //         ...heroDto,
+  //         abilities: abilities.some(ability => ability.name.toLowerCase().includes(searchTerm.toLowerCase())),
+  //         techniques: techniques.some(technique => technique.name.toLowerCase().includes(searchTerm.toLowerCase()))
+  //       })
+  //       ))
+  //   );
+  // }
+  // this.getHeroesDto$().pipe(
+
+  //   // tap(res => console.log("RES 1: ", res)),
+  //   tap(res => console.log("RES 1: ", res)),
+  //   // filter((heroesDto: HeroDto[]) => heroesDto.map(
+  //   //   (heroDto: HeroDto) => heroDto.abilities.filter(
+  //   //     ability => ability.name.toLowerCase().includes(abilityName.toLowerCase())
+  //   //   )
+  //   // )),
+  //   // tap(res => console.log("RES 2: ", res))),
+  //   // map(heroesDto => heroesDto.filter(
+  //   //   heroDto => heroDto.abilities.filter(
+  //   //     ability => ability.name.toLowerCase().includes(abilityName.toLowerCase())
+  //   //   )
+  //   // )),
+  //   // // tap(res => console.log("RES 1: ", res)),
+
+  //   // // map(abilities => abilities.filter(
+  //   // //   ability => ability.name.toLowerCase().includes(abilityName.toLowerCase())
+  //   // // )),
+  //   tap(res => console.log("RES 2: ", res)));
   // }
 
   // getHeroesDtoById$(heroId: number): Observable<HeroDto> {

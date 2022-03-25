@@ -21,15 +21,16 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+
     this.route.params.subscribe((params) => {
-      if (params['searchTerm'])
+
+      if (params['searchTerm']) {
         //params.searchTerm params['searchTerm']
-        this.heroesDto$ = this.heroesDtoService.getHeroesDtoBySearchTerm$(
-          params['searchTerm']
-        );
+        this.heroesDto$ = this.heroesDtoService.getHeroesBySearchTerm$(params['searchTerm'])
+      }
+
       else this.heroesDto$ = this.heroesDtoService.getHeroesDto$();
     });
-
 
     // this.heroesDto$ = this.heroesDtoService.getHeroesDto$();
     // this.subHeroesDto = this.heroesDto$.subscribe(heroesDto => this.heroesDto = heroesDto);

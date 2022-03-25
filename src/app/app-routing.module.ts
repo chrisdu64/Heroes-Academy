@@ -13,6 +13,7 @@ import { HomeComponent } from './public/home/home.component';
 
 const routes: Routes = [
   { path: 'heroes', component: HeroesListComponent },
+  // { path: 'search', component: HeroesListComponent },
   { path: 'search/:searchTerm', component: HeroesListComponent },
   { path: 'heroes/:id', component: DetailComponent },
   { path: 'delete', component: DeletePageComponent },

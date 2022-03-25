@@ -34,7 +34,7 @@ export class DetailComponent implements OnInit, OnDestroy {
         heroDto => heroDto.id === this.heroId
       )
       ),
-      delay(1000)
+      delay(600)
     );
     // this.subHeroesDto = this.heroesDto$.subscribe(
     //   heroesDto => this.heroDto = heroesDto.find(

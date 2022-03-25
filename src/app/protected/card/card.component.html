@@ -71,7 +71,7 @@
         <button
           class="btn btn-outline-secondary"
           style="width: 40%"
-          routerLink="{{ heroDto.id }}"
+          [routerLink]="['/heroes', heroDto.id]"
         >
           Détails
         </button>

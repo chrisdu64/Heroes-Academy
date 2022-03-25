@@ -31,16 +31,12 @@ export class HeroesService {
 
     return this.getHeroes$().pipe(
       map(heroes => [...heroes].sort((a: Hero, b: Hero) => a.id - b.id)),
-      tap(r => console.log("le R1: ", r)),
       map(sortedHeroes => sortedHeroes[sortedHeroes.length - 1]),
-      tap(r => console.log("le R2: ", r)),
       map(previousHero => ({
         ...formValue,
         id: previousHero.id + 1
       })),
-      tap(r => console.log("le R3: ", r)),
       switchMap(newHero => this.http.post<Hero>(environment.apiUrl + "/heroes/", newHero)),
-      tap(r => console.log("le R4: ", r))
     )
   }
 

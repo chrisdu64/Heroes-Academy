@@ -44,6 +44,18 @@ export class AbilitiesService {
     )
   }
 
+  getAbilitiesByAbilityName$(abilityName: string): Observable<Ability[]> {
+    console.log("andouille");
+
+    return this.getAbilities$().pipe(
+      tap(ab => console.log('saucisses 1 : ', ab)),
+      map(abilities => abilities.filter(
+        ability => ability.name.toLowerCase().includes(abilityName.toLowerCase())
+      )
+      ),
+      tap(ab => console.log('saucisses 2: ', ab)));
+  }
+
   // deleteAbility$(heroId: number): Observable<Ability> {
   //   return this.getAbilities$().pipe(
   //     map(abilities => [...abilities]. )
@@ -60,4 +72,3 @@ export class AbilitiesService {
   //   return this.abilities;
   // }
 }
-
