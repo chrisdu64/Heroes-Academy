@@ -26,13 +26,13 @@
       <div class="d-flex justify-content-around">
         <button
           [routerLink]="['/create/ability', heroDto.id]"
-          class="w-25 btn btn-outline-success"
+          class="w-25 btn btn-outline-success mb-2"
         >
           Nouvelles capacités :
         </button>
         <button
           [routerLink]="['/delete/ability', heroDto.id]"
-          class="w-25 btn btn-outline-danger"
+          class="w-25 btn btn-outline-danger mb-2"
         >
           Supprimer une capacité :
         </button>
@@ -50,13 +50,13 @@
       <div class="d-flex justify-content-around">
         <button
           (click)="onCreateNewTechnique(heroDto.id)"
-          class="w-25 btn btn-outline-info"
+          class="w-25 btn btn-outline-info mb-2"
         >
           Nouvelles techniques :
         </button>
         <button
           (click)="onDeleteTechnique(heroDto.id)"
-          class="w-25 btn btn-outline-danger"
+          class="w-25 btn btn-outline-danger mb-2"
         >
           Supprimer une technique :
         </button>
