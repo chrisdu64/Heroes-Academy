@@ -26,7 +26,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
 
       if (params['searchTerm']) {
         //params.searchTerm params['searchTerm']
-        this.heroesDto$ = this.heroesDtoService.getHeroByforkjoin$(params['searchTerm'])
+        this.heroesDto$ = this.heroesDtoService.getHeroesDtoBySearchTerm$(params['searchTerm'])
       }
 
       else this.heroesDto$ = this.heroesDtoService.getHeroesDto$();
