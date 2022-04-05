@@ -33,7 +33,7 @@
         </ng-container>
         <ng-template #newAbility>
           <button
-            [routerLink]="['/create/ability', heroDto.id]"
+            [routerLink]="['/protected/create/ability', heroDto.id]"
             class="w-100 btn btn-success"
           >
             Nouvelle capacité :
@@ -60,7 +60,7 @@
         </ng-container>
         <ng-template #newTechnique>
           <button
-            [routerLink]="['/create/technique', heroDto.id]"
+            [routerLink]="['/protected/create/technique', heroDto.id]"
             class="w-100 btn btn-info text-white"
           >
             Nouvelle technique :
@@ -71,7 +71,7 @@
         <button
           class="btn btn-outline-secondary"
           style="width: 40%"
-          [routerLink]="['/heroes', heroDto.id]"
+          [routerLink]="['/protected/heroes', heroDto.id]"
         >
           Détails
         </button>

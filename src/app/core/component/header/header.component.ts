@@ -26,8 +26,8 @@ export class HeaderComponent implements OnInit {
 
   search(): void {
     if (this.searchTerm)
-      this.router.navigateByUrl('/search/' + this.searchTerm);
-    else this.router.navigateByUrl('/heroes')
+      this.router.navigateByUrl('/protected/heroes/search/' + this.searchTerm);
+    else this.router.navigateByUrl('/protected/heroes')
   }
 
 }

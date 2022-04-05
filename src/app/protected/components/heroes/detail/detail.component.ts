@@ -48,15 +48,15 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
 
   onReturn(): void {
-    this.router.navigateByUrl('heroes');
+    this.router.navigateByUrl('protected/heroes');
   }
 
   onCreateNewTechnique(id: number): void {
-    this.router.navigateByUrl(`create/technique/${id}`);
+    this.router.navigateByUrl(`protected/create/technique/${id}`);
   }
 
   onDeleteTechnique(id: number): void {
-    this.router.navigateByUrl(`delete/technique/${id}`);
+    this.router.navigateByUrl(`protected/delete/technique/${id}`);
   }
 
 }

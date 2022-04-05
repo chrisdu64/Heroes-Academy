@@ -43,7 +43,7 @@ export class NewAbilityComponent implements OnInit {
 
   onSubmitAbilityForm(): void {
     this.abilitiesService.addAbility$(this.abilityForm.value).pipe(
-      tap(() => this.router.navigateByUrl(`heroes/${this.heroId}`))
+      tap(() => this.router.navigateByUrl(`protected/heroes/${this.heroId}`))
     ).subscribe();
   }
 
