@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { DeleteAbilityComponent } from './delete-ability/delete-ability.component';
 import { DeletePageComponent } from './delete-page/delete-page.component';
-import { DeleteTechniqueComponent } from './delete-technique/delete-technique.component';
 import { DeleteRoutingModule } from './delete-routing.module';
+import { DeleteTechniqueComponent } from './delete-technique/delete-technique.component';
 
 
 
@@ -14,7 +14,7 @@ import { DeleteRoutingModule } from './delete-routing.module';
     DeleteTechniqueComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     DeleteRoutingModule
   ],
   exports: [

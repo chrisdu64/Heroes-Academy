@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { NewAbilityComponent } from './new-ability/new-ability.component';
-import { NewTechniqueComponent } from './new-technique/new-technique.component';
 import { NewHeroComponent } from './new-hero/new-hero.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { NewRoutingModule } from './new-routing.module';
+import { NewTechniqueComponent } from './new-technique/new-technique.component';
 
 
 
@@ -15,8 +14,7 @@ import { NewRoutingModule } from './new-routing.module';
     NewHeroComponent
   ],
   imports: [
-    CommonModule,
-    ReactiveFormsModule,
+    SharedModule,
     NewRoutingModule
   ],
   exports: [

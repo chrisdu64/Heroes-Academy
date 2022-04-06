@@ -87,5 +87,12 @@
   </div>
 </ng-container>
 <ng-container *ngIf="!heroDto">
-  <app-page-not-found></app-page-not-found>
+  <div>
+    <p>Pas de héros</p>
+    <button
+      class="btn btn-outline-secondary"
+      style="width: 40%"
+      [routerLink]="['protected/heroes']"
+    ></button>
+  </div>
 </ng-container>

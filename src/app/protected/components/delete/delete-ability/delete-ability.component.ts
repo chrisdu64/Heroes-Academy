@@ -35,7 +35,7 @@ export class DeleteAbilityComponent implements OnInit {
   }
 
   onDeleteAbility(id: number): void {
-    this.http.delete(environment.apiUrl + `/abilities/${id}`).subscribe(() => this.router.navigateByUrl(`/heroes/${this.heroId}`))
+    this.http.delete(environment.apiUrl + `/abilities/${id}`).subscribe(() => this.router.navigateByUrl(`/protected/heroes/${this.heroId}`))
 
   }
 

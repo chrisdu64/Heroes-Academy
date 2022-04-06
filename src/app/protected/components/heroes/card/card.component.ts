@@ -30,7 +30,7 @@ export class CardComponent implements OnInit {
   }
 
   onDeleteHero(idHero: number): void {
-    this.http.delete(environment.apiUrl + `/heroes/${idHero}`).subscribe(() => this.router.navigateByUrl('delete'))
+    this.http.delete(environment.apiUrl + `/heroes/${idHero}`).subscribe(() => this.router.navigateByUrl('protected/delete'))
 
   }
 }

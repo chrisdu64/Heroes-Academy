@@ -43,7 +43,7 @@ export class NewHeroComponent implements OnInit {
 
   onSubmitHeroForm() {
     this.heroesService.addHero$(this.heroForm.value).pipe(
-      tap(() => this.router.navigateByUrl('heroes'))
+      tap(() => this.router.navigateByUrl('protected/heroes'))
     ).subscribe();
   }
 

@@ -5,6 +5,7 @@ import { HomeComponent } from './public/home/home.component';
 
 const routes: Routes = [
   { path: 'protected', loadChildren: () => import('./protected/protected.module').then(m => m.ProtectedModule) },
+  // { path: 'protected', loadChildren: () => ProtectedModule }, autre possibilté si pas besoin du lazy
   { path: '', component: HomeComponent },
   { path: '**', component: PageNotFoundComponent }
 ];

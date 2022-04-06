@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CardComponent } from './card/card.component';
-import { HeroesListComponent } from './heroes-list/heroes-list.component';
-import { DetailComponent } from './detail/detail.component';
-import { HeroesRoutingModule } from './heroes-routing.module';
 import { CoreModule } from 'src/app/core/core.module';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { CardComponent } from './card/card.component';
+import { DetailComponent } from './detail/detail.component';
+import { HeroesListComponent } from './heroes-list/heroes-list.component';
+import { HeroesRoutingModule } from './heroes-routing.module';
+import { HeroesComponent } from './heroes.component';
 
 
 
@@ -13,11 +14,11 @@ import { CoreModule } from 'src/app/core/core.module';
     CardComponent,
     HeroesListComponent,
     DetailComponent,
+    HeroesComponent,
   ],
   imports: [
-    CommonModule,
-    HeroesRoutingModule,
-    CoreModule
+    SharedModule,
+    HeroesRoutingModule
   ],
   exports: [
     CardComponent,

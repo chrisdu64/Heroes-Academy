@@ -34,7 +34,7 @@ export class DeleteTechniqueComponent implements OnInit {
     );
   }
   onDeleteTechnique(id: number): void {
-    this.http.delete(environment.apiUrl + `/techniques/${id}`).subscribe(() => this.router.navigateByUrl(`/heroes/${this.heroId}`))
+    this.http.delete(environment.apiUrl + `/techniques/${id}`).subscribe(() => this.router.navigateByUrl(`/protected/heroes/${this.heroId}`))
 
   }
 
