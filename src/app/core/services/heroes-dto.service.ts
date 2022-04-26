@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { forkJoin, noop, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { forkJoin, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { getAbilities } from 'src/app/store/actions/ability.actions';
 import { HeroDto } from '../models/heroDto.interface';
 import { AbilitiesService } from './abilities.service';
 import { HeroesService } from './heroes.service';
@@ -20,7 +22,8 @@ export class HeroesDtoService {
   constructor(
     private heroesService: HeroesService,
     private abilitiesService: AbilitiesService,
-    private techniquesService: TechniquesService
+    private techniquesService: TechniquesService,
+    private store: Store
   ) { }
 
   setHeroesDto$(): void {
@@ -126,34 +129,6 @@ export class HeroesDtoService {
   //       }))
   //     )
   //   );
-  // }
-
-
-  // this.getHeroesDto$().pipe(
-
-  //   // tap(res => console.log("RES 1: ", res)),
-  //   tap(res => console.log("RES 1: ", res)),
-  //   // filter((heroesDto: HeroDto[]) => heroesDto.map(
-  //   //   (heroDto: HeroDto) => heroDto.abilities.filter(
-  //   //     ability => ability.name.toLowerCase().includes(abilityName.toLowerCase())
-  //   //   )
-  //   // )),
-  //   // tap(res => console.log("RES 2: ", res))),
-  //   // map(heroesDto => heroesDto.filter(
-  //   //   heroDto => heroDto.abilities.filter(
-  //   //     ability => ability.name.toLowerCase().includes(abilityName.toLowerCase())
-  //   //   )
-  //   // )),
-  //   // // tap(res => console.log("RES 1: ", res)),
-
-  //   // // map(abilities => abilities.filter(
-  //   // //   ability => ability.name.toLowerCase().includes(abilityName.toLowerCase())
-  //   // // )),
-  //   tap(res => console.log("RES 2: ", res)));
-  // }
-
-  // getHeroesDtoById$(heroId: number): Observable<HeroDto> {
-  //   return this.http.get<HeroDto>(`http://localhost:3200/heroes/${heroId}`)
   // }
 
 }

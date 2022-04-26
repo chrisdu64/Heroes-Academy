@@ -1,11 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Ability } from 'src/app/core/models/ability.interface';
 import { AbilitiesService } from 'src/app/core/services/abilities.service';
-import { environment } from 'src/environments/environment';
+import { selectAbilities } from 'src/app/store/selectors/ability.selectors';
 
 @Component({
   selector: 'app-delete-ability',
@@ -20,14 +20,14 @@ export class DeleteAbilityComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private abilitiesService: AbilitiesService,
-    private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) { }
 
   ngOnInit(): void {
     this.heroId = +this.route.snapshot.params['id'];
 
-    this.abilities$ = this.abilitiesService.getAbilities$().pipe(
+    this.abilities$ = this.store.select(selectAbilities).pipe(
       map(abilities => abilities.filter(
         ability => ability.heroId === this.heroId
       ))
@@ -35,7 +35,7 @@ export class DeleteAbilityComponent implements OnInit {
   }
 
   onDeleteAbility(id: number): void {
-    this.http.delete(environment.apiUrl + `/abilities/${id}`).subscribe(() => this.router.navigateByUrl(`/protected/heroes/${this.heroId}`))
+    this.abilitiesService.deleteAbility$(id).subscribe(() => this.router.navigateByUrl(`/protected/heroes/${this.heroId}`))
 
   }
 

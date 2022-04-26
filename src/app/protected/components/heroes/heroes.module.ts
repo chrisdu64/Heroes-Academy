@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CardComponent } from './card/card.component';
 import { DetailComponent } from './detail/detail.component';

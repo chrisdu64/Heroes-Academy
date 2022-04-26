@@ -1,23 +1,21 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { HeroDto } from 'src/app/core/models/heroDto.interface';
-import { HeroesDtoService } from 'src/app/core/services/heroes-dto.service';
+import { selectHeroesDto, selectHeroesDtoBySearchTerm } from 'src/app/store/selectors/hero-dto.selectors';
 @Component({
   selector: 'app-heroes-list',
   templateUrl: './heroes-list.component.html',
   styleUrls: ['./heroes-list.component.scss']
 })
-export class HeroesListComponent implements OnInit, OnDestroy {
+export class HeroesListComponent implements OnInit {
 
   heroesDto$!: Observable<HeroDto[]>;
-  // heroesDto!: HeroDto[];
-
-  // subHeroesDto!: Subscription;
 
   constructor(
-    private heroesDtoService: HeroesDtoService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store
   ) { }
 
   ngOnInit(): void {
@@ -25,20 +23,13 @@ export class HeroesListComponent implements OnInit, OnDestroy {
     this.route.params.subscribe((params) => {
 
       if (params['searchTerm']) {
-        //params.searchTerm params['searchTerm']
-        this.heroesDto$ = this.heroesDtoService.getHeroesDtoBySearchTerm$(params['searchTerm'])
-      }
+        this.heroesDto$ = this.store.select(selectHeroesDtoBySearchTerm(params['searchTerm']))
+        console.log(selectHeroesDtoBySearchTerm(params['searchTerm']));
 
-      else this.heroesDto$ = this.heroesDtoService.getHeroesDto$();
+      } else this.heroesDto$ = this.store.select(selectHeroesDto)
     });
-
-    // this.heroesDto$ = this.heroesDtoService.getHeroesDto$();
-    // this.subHeroesDto = this.heroesDto$.subscribe(heroesDto => this.heroesDto = heroesDto);
   }
 
-  ngOnDestroy(): void {
-    // this.subHeroesDto.unsubscribe();
-  }
 }
 
 

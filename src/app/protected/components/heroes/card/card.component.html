@@ -14,13 +14,13 @@
         </p>
       </div>
       <div class="card-body">
-        <ng-container *ngIf="heroDto.abilities.length !== 0; else newAbility">
+        <ng-container *ngIf="numberOfAbilities !== 0; else newAbility">
           <h4 class="list-group-item text-uppercase fw-bold text-success">
             Capacités :
           </h4>
           <h6 class="list-group-item text-uppercase fw-bold text-center">
             Nombre de capacités :
-            <span class="text-warning">{{ numberOfAbilities }}</span>
+            <span class="text-warning">{{ abilitiesCount$ | async }}</span>
           </h6>
           <ul class="list-group">
             <li
@@ -39,15 +39,13 @@
             Nouvelle capacité :
           </button>
         </ng-template>
-        <ng-container
-          *ngIf="heroDto.techniques.length !== 0; else newTechnique"
-        >
+        <ng-container *ngIf="techniquesCount !== 0; else newTechnique">
           <h4 class="list-group-item text-uppercase fw-bold text-info">
             Techniques :
           </h4>
           <h6 class="list-group-item text-uppercase fw-bold text-center">
             Nombre de techniques :
-            <span class="text-warning">{{ numberOfTechniques }}</span>
+            <span class="text-warning">{{ techniquesCount }}</span>
           </h6>
           <ul class="list-group">
             <li

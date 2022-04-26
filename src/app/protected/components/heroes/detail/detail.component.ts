@@ -1,50 +1,31 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { HeroDto } from 'src/app/core/models/heroDto.interface';
-import { HeroesDtoService } from 'src/app/core/services/heroes-dto.service';
+import { selectHeroDtoById } from 'src/app/store/selectors/hero-dto.selectors';
 
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss']
 })
-export class DetailComponent implements OnInit, OnDestroy {
+export class DetailComponent implements OnInit {
 
-  // subHeroesDto!: Subscription;
   heroDto!: HeroDto | undefined;
-  // heroesDto$!: Observable<HeroDto[]>;
   heroDto$!: Observable<HeroDto | undefined>;
   heroId!: number;
 
   constructor(
-    private heroesDtoService: HeroesDtoService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) { }
 
   ngOnInit(): void {
-    // const heroId = +this.route.snapshot.params['id'];
-    // this.heroDto$ = this.heroesDtoService.getHeroesDtoById$(heroId);
     this.heroId = +this.route.snapshot.params['id'];
 
-    this.heroDto$ = this.heroesDtoService.getHeroesDto$().pipe(
-      map(heroesDto => heroesDto.find(
-        heroDto => heroDto.id === this.heroId
-      )
-      ),
-      delay(600)
-    );
-    // this.subHeroesDto = this.heroesDto$.subscribe(
-    //   heroesDto => this.heroDto = heroesDto.find(
-    //     heroDto => heroDto.id === this.heroId
-    //   )
-    // );
-  }
-
-  ngOnDestroy(): void {
-    // this.subHeroesDto.unsubscribe();
+    this.heroDto$ = this.store.select(selectHeroDtoById(this.heroId));
   }
 
   onReturn(): void {
