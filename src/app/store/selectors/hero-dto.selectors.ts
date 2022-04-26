@@ -47,7 +47,6 @@ export const selectHeroesDtoBySearchTerm = (searchTerm: string) => createSelecto
             heroDto.techniques.some(
                 technique => technique.name.toLowerCase().includes(searchTerm.toLowerCase())
             )
-
     )
 );
 

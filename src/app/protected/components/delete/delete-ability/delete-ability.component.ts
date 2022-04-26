@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Ability } from 'src/app/core/models/ability.interface';
 import { AbilitiesService } from 'src/app/core/services/abilities.service';
-import { selectAbilities } from 'src/app/store/selectors/ability.selectors';
+import { selectAbilities, selectAbilitiesByHeroId } from 'src/app/store/selectors/ability.selectors';
 
 @Component({
   selector: 'app-delete-ability',
@@ -27,11 +27,7 @@ export class DeleteAbilityComponent implements OnInit {
   ngOnInit(): void {
     this.heroId = +this.route.snapshot.params['id'];
 
-    this.abilities$ = this.store.select(selectAbilities).pipe(
-      map(abilities => abilities.filter(
-        ability => ability.heroId === this.heroId
-      ))
-    );
+    this.abilities$ = this.store.select(selectAbilitiesByHeroId(this.heroId))
   }
 
   onDeleteAbility(id: number): void {

@@ -15,10 +15,6 @@ export class HeroesService {
     return this.http.get<Hero[]>(environment.apiUrl + '/heroes');
   }
 
-  getHeroesById$(id: number): Observable<Hero> {
-    return this.http.get<Hero>(environment.apiUrl + "/heroes/" + id)
-  }
-
   addHero$(formValue: { name: string, description: string, myImg: string }): Observable<Hero> {
 
     return this.getHeroes$().pipe(
