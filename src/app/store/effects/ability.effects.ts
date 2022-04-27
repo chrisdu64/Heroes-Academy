@@ -21,8 +21,8 @@ export class AbilityEffects {
 
   deleteAbility$ = createEffect(() => this.actions$.pipe(
     ofType(deleteAbility),
-    switchMap(action => this.abilitiesService.deleteAbility$(action.heroId).pipe(
-      map(_ => deleteAbilitySuccess({ heroId: action.heroId })),
+    switchMap(action => this.abilitiesService.deleteAbility$(action.id).pipe(
+      map(_ => deleteAbilitySuccess({ id: action.id })),
       catchError(() => of(deleteAbilityError))
     )),
   ));

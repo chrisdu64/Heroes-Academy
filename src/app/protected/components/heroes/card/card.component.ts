@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { HeroDto } from 'src/app/core/models/heroDto.interface';
-import { HeroesService } from 'src/app/core/services/heroes.service';
+import { DeleteHero } from 'src/app/store/actions/hero.actions';
 import { selectHeroesDtoAbilitiesCount } from 'src/app/store/selectors/hero-dto.selectors';
 
 @Component({
@@ -23,7 +23,6 @@ export class CardComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private heroesService: HeroesService,
     private store: Store) {
   }
 
@@ -33,7 +32,10 @@ export class CardComponent implements OnInit {
     this.techniquesCount = this.heroDto.techniques.length;
   }
 
-  onDeleteHero(idHero: number): void {
-    this.heroesService.deleteHero$(idHero).subscribe(() => this.router.navigateByUrl('protected/delete'))
+  onDeleteHero(id: number): void {
+    if (confirm('Etes-vous sûr de vouloir supprimer ce héros ?')) {
+      this.store.dispatch(DeleteHero({ id }));
+      this.router.navigateByUrl('protected/delete')
+    }
   }
 }

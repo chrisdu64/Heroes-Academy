@@ -14,6 +14,15 @@ export const getHeroesFailure = createAction(
   props<{ failureResponse: HttpErrorResponse }>()
 );
 
-
-
-
+export const DeleteHero = createAction(
+  '[Protected] Delete Hero',
+  props<{ id: number }>()
+)
+export const DeleteHeroSuccess = createAction(
+  '[Protected] Delete Hero',
+  props<{ id: number }>()
+)
+export const DeleteHeroError = createAction(
+  '[Protected] Delete Hero Error',
+  props<{ error: HttpErrorResponse }>()
+)

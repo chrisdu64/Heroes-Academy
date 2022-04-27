@@ -31,11 +31,11 @@ export const addAbilityError = createAction(
 // Supprimer une capacité:
 export const deleteAbility = createAction(
   '[Protected] Delete Ability',
-  props<{ heroId: number }>()
+  props<{ id: number }>()
 );
 export const deleteAbilitySuccess = createAction(
   '[Protected] Delete Ability Success',
-  props<{ heroId: number }>()
+  props<{ id: number }>()
 );
 export const deleteAbilityError = createAction(
   '[Protected] Delete Ability Error',

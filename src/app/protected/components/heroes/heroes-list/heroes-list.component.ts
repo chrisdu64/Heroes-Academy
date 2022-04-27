@@ -24,12 +24,7 @@ export class HeroesListComponent implements OnInit {
     this.route.params.subscribe((params) => {
 
       if (params['searchTerm']) {
-        this.heroesDto$ = this.store.select(selectHeroesDtoBySearchTerm(params['searchTerm'])).pipe(
-          map(searchResult => searchResult.sort(
-            (a: HeroDto, b: HeroDto) => (a.name > b.name ? 1 : (
-              a.name === b.name ? 0 : -1)))
-          )
-        )
+        this.heroesDto$ = this.store.select(selectHeroesDtoBySearchTerm(params['searchTerm']))
 
       } else this.heroesDto$ = this.store.select(selectHeroesDto)
     });

@@ -11,7 +11,7 @@ import { DeleteTechniqueComponent } from './delete-technique/delete-technique.co
   declarations: [
     DeleteAbilityComponent,
     DeletePageComponent,
-    DeleteTechniqueComponent
+    DeleteTechniqueComponent,
   ],
   imports: [
     SharedModule,

@@ -8,3 +8,8 @@ export const selectTechniques = createSelector(
     selectTechniquesState,
     techniques => techniques
 )
+
+export const selectTechniqueByHeroId = (heroId: number) => createSelector(
+    selectTechniques,
+    techniques => techniques.filter(technique => technique.heroId === heroId)
+)

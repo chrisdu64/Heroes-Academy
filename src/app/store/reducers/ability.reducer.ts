@@ -11,6 +11,6 @@ export const abilityReducer = createReducer(
   initialState,
   on(getAbilitiesSuccess, (state, { abilities }) => abilities),
   on(getAbilitiesFailure, (state) => initialState),
-  on(deleteAbilitySuccess, (state, { heroId }) => state.filter(ability => ability.heroId !== heroId)),
+  on(deleteAbilitySuccess, (state, { id }) => state.filter(ability => ability.id !== id)),
 
 );

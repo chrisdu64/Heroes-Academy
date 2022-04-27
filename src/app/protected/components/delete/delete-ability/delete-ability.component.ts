@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Ability } from 'src/app/core/models/ability.interface';
-import { AbilitiesService } from 'src/app/core/services/abilities.service';
-import { selectAbilities, selectAbilitiesByHeroId } from 'src/app/store/selectors/ability.selectors';
+import { deleteAbility } from 'src/app/store/actions/ability.actions';
+import { selectAbilitiesByHeroId } from 'src/app/store/selectors/ability.selectors';
 
 @Component({
   selector: 'app-delete-ability',
@@ -19,7 +18,6 @@ export class DeleteAbilityComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private abilitiesService: AbilitiesService,
     private router: Router,
     private store: Store
   ) { }
@@ -31,7 +29,11 @@ export class DeleteAbilityComponent implements OnInit {
   }
 
   onDeleteAbility(id: number): void {
-    this.abilitiesService.deleteAbility$(id).subscribe(() => this.router.navigateByUrl(`/protected/heroes/${this.heroId}`))
+    if (confirm('Etes-vous sûr de vouloir supprimer cette capacité ?')) {
+
+      this.store.dispatch(deleteAbility({ id }));
+      this.router.navigateByUrl(`/protected/heroes/${this.heroId}`)
+    }
 
   }
 

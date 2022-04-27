@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { HeroesService } from 'src/app/core/services/heroes.service';
-import { getHeroes, getHeroesFailure, getHeroesSuccess } from '../actions/hero.actions';
+import { DeleteHero, DeleteHeroError, DeleteHeroSuccess, getHeroes, getHeroesFailure, getHeroesSuccess } from '../actions/hero.actions';
 
 
 
@@ -18,6 +18,13 @@ export class HeroEffects {
     ))
   ))
 
+  deleteHero$ = createEffect(() => this.actions$.pipe(
+    ofType(DeleteHero),
+    switchMap(action => this.heroesService.deleteHero$(action.id).pipe(
+      map(_ => DeleteHeroSuccess({ id: action.id })),
+      catchError(() => of(DeleteHeroError))
+    ))
+  ))
   constructor(
     private actions$: Actions,
     private heroesService: HeroesService) { }

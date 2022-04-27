@@ -17,5 +17,4 @@ export class ProtectedComponent implements OnInit {
     this.store.dispatch(getAbilities());
     this.store.dispatch(getTechniques());
   }
-
 }

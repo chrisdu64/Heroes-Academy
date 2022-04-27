@@ -1,4 +1,5 @@
 import { createSelector } from '@ngrx/store';
+import { HeroDto } from 'src/app/core/models/heroDto.interface';
 import { selectAbilities } from './ability.selectors';
 import { selectHeroes } from './hero.selectors';
 import { selectTechniques } from './technique.selectors';
@@ -38,17 +39,22 @@ export const selectHeroDtoById = (heroId: number) => createSelector(
 );
 
 export const selectHeroesDtoBySearchTerm = (searchTerm: string) => createSelector(
-    selectHeroesDto,
-    heroesDto => heroesDto.filter(
-        heroDto => heroDto.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            heroDto.abilities.some(
-                ability => ability.name.toLowerCase().includes(searchTerm.toLowerCase())
-            ) ||
-            heroDto.techniques.some(
-                technique => technique.name.toLowerCase().includes(searchTerm.toLowerCase())
-            )
-    )
-);
+    selectHeroesDtoByHeroDtoName(searchTerm),
+    selectHeroesDtoByAbilityName(searchTerm),
+    selectHeroesDtoByTechniqueName(searchTerm),
+    (searchByName, searchByAbilityName, searchByTechniqueName) => [
+        ...searchByName,
+        ...searchByAbilityName,
+        ...searchByTechniqueName
+    ].reduce((acc, cur) => {
+        if (!acc.some(heroDto => heroDto.id === cur.id)) acc = [...acc, cur];
+        test();
+        return acc;
+    }, [] as HeroDto[])
+        .sort((a: HeroDto, b: HeroDto) =>
+            (a.name > b.name ? 1 : (a.name === b.name ? 0 : -1))
+        )
+)
 
 export const selectHeroesDtoByHeroDtoName = (heroDtoName: string) => createSelector(
     selectHeroesDto,
@@ -66,7 +72,7 @@ export const selectHeroesDtoByAbilityName = (abilityName: string) => createSelec
     )
 )
 
-export const selectHeroesByTechniqueName = (techniqueName: string) => createSelector(
+export const selectHeroesDtoByTechniqueName = (techniqueName: string) => createSelector(
     selectHeroesDto,
     heroesDto => heroesDto.filter(
         heroDto => heroDto.techniques.some(
@@ -74,3 +80,8 @@ export const selectHeroesByTechniqueName = (techniqueName: string) => createSele
         )
     )
 )
+
+export const test = () => {
+    console.log("test");
+
+}

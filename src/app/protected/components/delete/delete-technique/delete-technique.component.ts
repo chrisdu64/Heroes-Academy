@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Technique } from 'src/app/core/models/technique.interface';
-import { TechniquesService } from 'src/app/core/services/techniques.service';
+import { deleteTechnique } from 'src/app/store/actions/technique.actions';
+import { selectTechniqueByHeroId } from 'src/app/store/selectors/technique.selectors';
 
 @Component({
   selector: 'app-delete-technique',
@@ -16,24 +17,21 @@ export class DeleteTechniqueComponent implements OnInit {
 
 
   constructor(
-    private techniquesServices: TechniquesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store
   ) { }
 
   ngOnInit(): void {
     this.heroId = +this.route.snapshot.params['id'];
 
-    this.techniques$ = this.techniquesServices.getTechniques$().pipe(
-      map(techniques => techniques.filter(
-        technique => technique.heroId === this.heroId
-      ))
-    );
+    this.techniques$ = this.store.select(selectTechniqueByHeroId(this.heroId));
   }
   onDeleteTechnique(id: number): void {
-    this.techniquesServices.deleteTechnique$(id).subscribe(() => this.router.navigateByUrl(`/protected/heroes/${this.heroId}`))
+    if (confirm('Etes-vous sûr de vouloir supprimer cette technique ?')) {
 
+      this.store.dispatch(deleteTechnique({ id }));
+      this.router.navigateByUrl(`/protected/heroes/${this.heroId}`)
+    }
   }
-
-
 }
