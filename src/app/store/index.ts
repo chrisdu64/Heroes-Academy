@@ -13,6 +13,7 @@ export interface AppState {
   'heroes': Hero[],
   'abilities': Ability[],
   'techniques': Technique[]
+  //  on peut écrire les propriètés sans les simple quote
 }
 
 export const reducers: ActionReducerMap<AppState> = {

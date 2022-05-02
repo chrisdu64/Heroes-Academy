@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { TechniquesService } from 'src/app/core/services/techniques.service';
-import { deleteTechnique, DeleteTechniqueError, deleteTechniqueSuccess, getTechniques, getTechniquesFailure, getTechniquesSuccess } from '../actions/technique.actions';
+import { addTechnique, addTechniqueFailure, deleteTechnique, DeleteTechniqueError, deleteTechniqueSuccess, getTechniques, getTechniquesFailure, getTechniquesSuccess } from '../actions/technique.actions';
 
 
 
@@ -24,6 +24,14 @@ export class TechniqueEffects {
       catchError(() => of(DeleteTechniqueError))
     )),
   ));
+
+  addTechnique$ = createEffect(() => this.actions$.pipe(
+    ofType(addTechnique),
+    switchMap(action => this.techniquesService.addTechnique$(action.newTechnique).pipe(
+      map(_ => getTechniques()),
+      catchError(() => of(addTechniqueFailure))
+    )),
+  ))
 
   constructor(
     private actions$: Actions,

@@ -18,12 +18,7 @@ export class HeroesService {
   addHero$(formValue: { name: string, description: string, myImg: string }): Observable<Hero> {
 
     return this.getHeroes$().pipe(
-      map(heroes => [...heroes].sort((a: Hero, b: Hero) => a.id - b.id)),
-      map(sortedHeroes => sortedHeroes[sortedHeroes.length - 1]),
-      map(previousHero => ({
-        ...formValue,
-        id: previousHero.id + 1
-      })),
+      map(() => formValue),
       switchMap(newHero => this.http.post<Hero>(environment.apiUrl + "/heroes/", newHero)),
     )
   }

@@ -14,6 +14,15 @@ export const getTechniquesFailure = createAction(
   props<{ failureResponse: HttpErrorResponse }>()
 );
 
+export const addTechnique = createAction(
+  '[Technique] Add Technique',
+  props<{ newTechnique: Technique }>()
+);
+export const addTechniqueFailure = createAction(
+  '[Technique] Add Technique Failure',
+  props<{ error: HttpErrorResponse }>()
+)
+
 export const deleteTechnique = createAction(
   '[Technique] Delete Technique',
   props<{ id: number }>()

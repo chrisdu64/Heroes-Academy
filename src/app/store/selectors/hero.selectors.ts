@@ -7,4 +7,8 @@ export const selectHeroesState = createFeatureSelector<Hero[]>(heroFeatureKey)
 export const selectHeroes = createSelector(
     selectHeroesState,
     heroes => heroes
+);
+export const selectHeroesCountForId = createSelector(
+    selectHeroes,
+    heroes => heroes.length + 1
 )

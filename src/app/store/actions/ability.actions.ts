@@ -17,11 +17,7 @@ export const getAbilitiesFailure = createAction(
 // Ajouter une capacité:
 export const addAbility = createAction(
   '[Protected] add Ability',
-  props<{ heroId: number }>()
-);
-export const addAbilitySuccess = createAction(
-  '[Protected] Add Ability Success',
-  props<{ heroId: number }>()
+  props<{ newAbility: Ability }>()
 );
 export const addAbilityError = createAction(
   '[Protected] Add Ability Error',

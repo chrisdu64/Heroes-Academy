@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Technique } from 'src/app/core/models/technique.interface';
 import { TechniquesService } from 'src/app/core/services/techniques.service';
+import { addTechnique } from 'src/app/store/actions/technique.actions';
 
 @Component({
   selector: 'app-new-technique',
@@ -21,7 +23,8 @@ export class NewTechniqueComponent implements OnInit {
     private formBuilder: FormBuilder,
     private techniquesService: TechniquesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store
   ) { }
 
   ngOnInit(): void {
@@ -42,9 +45,11 @@ export class NewTechniqueComponent implements OnInit {
   }
 
   onSubmitTechniqueForm(): void {
-    this.techniquesService.addTechnique$(this.techniqueForm.value).pipe(
-      tap(() => this.router.navigateByUrl(`heroes/${this.heroId}`))
-    ).subscribe();
+    let newTechnique: Technique = {
+      name: this.techniqueForm.value.name,
+      heroId: this.techniqueForm.value.heroId
+    };
+    this.store.dispatch(addTechnique({ newTechnique }));
+    this.router.navigateByUrl(`heroes/${this.heroId}`);
   }
-
 }

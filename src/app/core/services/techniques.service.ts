@@ -19,12 +19,7 @@ export class TechniquesService {
 
   addTechnique$(formValue: { name: string, heroId: number }): Observable<Technique> {
     return this.getTechniques$().pipe(
-      map(techniques => [...techniques].sort((a: Technique, b: Technique) => a.id - b.id)),
-      map(sortedTechniques => sortedTechniques[sortedTechniques.length - 1]),
-      map(previousTechnique => ({
-        ...formValue,
-        id: previousTechnique.id + 1
-      })),
+      map(() => formValue),
       switchMap(newTechnique => this.http.post<Technique>(environment.apiUrl + "/techniques/", newTechnique))
     )
   }

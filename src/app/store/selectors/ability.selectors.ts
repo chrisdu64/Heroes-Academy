@@ -13,3 +13,7 @@ export const selectAbilitiesByHeroId = (heroId: number) => createSelector(
     selectAbilities,
     abilities => abilities.filter(ability => ability.heroId === heroId)
 )
+export const selectAbilitiesCountForId = createSelector(
+    selectAbilities,
+    abilities => abilities.length + 1
+)

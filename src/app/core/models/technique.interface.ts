@@ -1,5 +1,5 @@
 export interface Technique {
-    id:number;
+    id?: number;
     heroId: number;
     name: string;
 }

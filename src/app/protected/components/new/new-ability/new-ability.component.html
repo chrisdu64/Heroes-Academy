@@ -11,7 +11,7 @@
         style="margin: 20px auto"
         type="submit"
         (click)="onSubmitAbilityForm()"
-        [disabled]="abilityForm.invalid"
+        [disabled]="!abilityForm.valid"
       >
         Enregistrer
       </button>

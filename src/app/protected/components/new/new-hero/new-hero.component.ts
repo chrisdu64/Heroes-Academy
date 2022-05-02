@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Hero } from 'src/app/core/models/hero.interface';
 import { HeroesService } from 'src/app/core/services/heroes.service';
+import { addHero } from 'src/app/store/actions/hero.actions';
 
 @Component({
   selector: 'app-new-hero',
@@ -20,7 +22,8 @@ export class NewHeroComponent implements OnInit {
   constructor(
     private formBuiler: FormBuilder,
     private heroesService: HeroesService,
-    private router: Router) { }
+    private router: Router,
+    private store: Store) { }
 
   ngOnInit(): void {
 
@@ -36,15 +39,19 @@ export class NewHeroComponent implements OnInit {
     this.newHero$ = this.heroForm.valueChanges.pipe(
       map(formValue => ({
         ...formValue,
-        id: 0
+        id: 0,
       }))
     )
   }
 
   onSubmitHeroForm() {
-    this.heroesService.addHero$(this.heroForm.value).pipe(
-      tap(() => this.router.navigateByUrl('protected/heroes'))
-    ).subscribe();
+    let newHero: Hero = {
+      name: this.heroForm.value.name,
+      description: this.heroForm.value.description,
+      myImg: this.heroForm.value.myImg,
+      id: this.heroForm.value.id
+    };
+    this.store.dispatch(addHero({ newHero }));
+    this.router.navigateByUrl('protected/heroes');
   }
-
 }

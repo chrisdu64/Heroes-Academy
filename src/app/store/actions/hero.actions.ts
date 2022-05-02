@@ -13,6 +13,14 @@ export const getHeroesFailure = createAction(
   '[Protected] Get Heroes Failure',
   props<{ failureResponse: HttpErrorResponse }>()
 );
+export const addHero = createAction(
+  '[Protected] Add Heroes Success',
+  props<{ newHero: Hero }>()
+);
+export const addHeroFailure = createAction(
+  '[Protected] Add Heroes Failure',
+  props<{ failureResponse: HttpErrorResponse }>()
+);
 
 export const DeleteHero = createAction(
   '[Protected] Delete Hero',

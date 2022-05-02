@@ -3,8 +3,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
+import { Ability } from 'src/app/core/models/ability.interface';
 import { AbilitiesService } from 'src/app/core/services/abilities.service';
-import { deleteAbility, deleteAbilityError, deleteAbilitySuccess, getAbilities, getAbilitiesFailure, getAbilitiesSuccess } from '../actions/ability.actions';
+import { addAbility, addAbilityError, deleteAbility, deleteAbilityError, deleteAbilitySuccess, getAbilities, getAbilitiesFailure, getAbilitiesSuccess } from '../actions/ability.actions';
 
 
 
@@ -26,6 +27,14 @@ export class AbilityEffects {
       catchError(() => of(deleteAbilityError))
     )),
   ));
+
+  addAbility$ = createEffect(() => this.actions$.pipe(
+    ofType(addAbility),
+    switchMap(action => this.abilitiesService.addAbility$(action.newAbility).pipe(
+      map(_ => getAbilities()),
+      catchError(() => of(addAbilityError))
+    ))
+  ))
 
   constructor(
     private actions$: Actions,

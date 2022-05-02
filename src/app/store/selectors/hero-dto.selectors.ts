@@ -47,8 +47,7 @@ export const selectHeroesDtoBySearchTerm = (searchTerm: string) => createSelecto
         ...searchByAbilityName,
         ...searchByTechniqueName
     ].reduce((acc, cur) => {
-        if (!acc.some(heroDto => heroDto.id === cur.id)) acc = [...acc, cur];
-        test();
+        if (!acc.some(heroDto => heroDto.id === cur.id && cur.id !== null)) acc = [...acc, cur];
         return acc;
     }, [] as HeroDto[])
         .sort((a: HeroDto, b: HeroDto) =>

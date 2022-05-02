@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Ability } from 'src/app/core/models/ability.interface';
-import { AbilitiesService } from 'src/app/core/services/abilities.service';
+import { addAbility } from 'src/app/store/actions/ability.actions';
 
 @Component({
   selector: 'app-new-ability',
@@ -19,9 +20,9 @@ export class NewAbilityComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private abilitiesService: AbilitiesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +34,7 @@ export class NewAbilityComponent implements OnInit {
     }, {
       updateOn: 'blur'
     });
+
     this.newAbility$ = this.abilityForm.valueChanges.pipe(
       map(formValue => ({
         ...formValue,
@@ -42,9 +44,13 @@ export class NewAbilityComponent implements OnInit {
   }
 
   onSubmitAbilityForm(): void {
-    this.abilitiesService.addAbility$(this.abilityForm.value).pipe(
-      tap(() => this.router.navigateByUrl(`heroes/${this.heroId}`))
-    ).subscribe();
-  }
 
+    let newAbility: Ability = {
+      name: this.abilityForm.value.name,
+      heroId: this.abilityForm.value.heroId
+    };
+
+    this.store.dispatch(addAbility({ newAbility }));
+    this.router.navigateByUrl(`protected/heroes/${this.heroId}`);
+  }
 }
