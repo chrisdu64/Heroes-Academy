@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Hero } from 'src/app/core/models/hero.interface';
 import { updateHero } from 'src/app/store/actions/hero.actions';
 import { selectHeroById } from 'src/app/store/selectors/hero.selectors';
@@ -15,11 +15,8 @@ import { selectHeroById } from 'src/app/store/selectors/hero.selectors';
 })
 export class UpdateHeroComponent implements OnInit {
   heroId!: number;
-  hero$!: Observable<Hero | undefined>
-
   updatedHeroForm!: FormGroup;
-  // heroValues!: Hero;
-  // updatedHero$!: Observable<Hero>;
+  updatedForm$!: Observable<FormGroup>;
   urlVerify!: RegExp;
 
   constructor(
@@ -31,31 +28,34 @@ export class UpdateHeroComponent implements OnInit {
 
   ngOnInit(): void {
     this.heroId = +this.route.snapshot.params['id'];
-    console.log("id:", this.heroId);
 
-    this.hero$ = this.store.select(selectHeroById(this.heroId)).pipe(
-      tap(res => console.log("resultat:", res))
-    );
+    // this.hero$ = this.store.select(selectHeroById(this.heroId)).pipe(
+    //   tap(res => console.log("resultat:", res))
+    // );
 
+    this.updatedForm$ = this.store.select(selectHeroById(this.heroId)).pipe(
+      map(hero => this.updatedHeroForm = this.formBuiler.group({
+        name: [hero?.name, Validators.required],
+        description: [hero?.description, Validators.required],
+        myImg: [hero?.myImg, [Validators.required, Validators.pattern(this.urlVerify)]]
+      }, {
+        updateOn: 'blur'
+      }))
+    )
     this.urlVerify = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/;
-
-    this.updatedHeroForm = this.formBuiler.group({
-      name: [null, Validators.required],
-      description: [null, Validators.required],
-      myImg: [null, [Validators.required, Validators.pattern(this.urlVerify)]]
-    }, {
-      updateOn: 'blur'
-    });
-
-    // this.updatedHero$ = this.updatedForm.valueChanges.pipe(
-    //   map(formValue => formValue)
-    // )
   }
-  // setValue() {
-  //   this.updatedForm.setValue({
-  //     name: this.heroDto.name, description: this.heroDto.description, myImg: this.heroDto.myImg, id: this.heroDto.id
-  //   });
-  // }
+
+  /* Dans ngOnInit méthode pour récupérer les données de hero, patate!!!!!!!!!!
+   this.hero$.subscribe(hero => this.heroValues = hero);
+
+
+   this.updatedHeroForm = this.formBuiler.group({
+     name: [null, Validators.required],
+     description: [null, Validators.required],
+     myImg: [null, [Validators.required, Validators.pattern(this.urlVerify)]]
+   }, {
+     updateOn: 'blur'
+   });*/
   onSubmitUpdatedForm() {
 
     let updatedHero: Hero = {
