@@ -11,4 +11,10 @@ export const selectHeroes = createSelector(
 export const selectHeroesCountForId = createSelector(
     selectHeroes,
     heroes => heroes.length + 1
-)
+);
+export const selectHeroById = (id: number) => createSelector(
+    selectHeroes,
+    heroes => heroes.find(
+        hero => hero.id === id)
+);
+

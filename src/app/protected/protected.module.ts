@@ -6,6 +6,7 @@ import { HeroEffects } from '../store/effects/hero.effects';
 import { TechniqueEffects } from '../store/effects/technique.effects';
 import { ProtectedRoutingModule } from './protected-routing.module';
 import { ProtectedComponent } from './protected.component';
+import { UpdateHeroComponent } from './components/update/update-hero/update-hero/update-hero.component';
 
 @NgModule({
   declarations: [

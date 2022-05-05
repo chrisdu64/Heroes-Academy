@@ -3,9 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Hero } from 'src/app/core/models/hero.interface';
-import { HeroesService } from 'src/app/core/services/heroes.service';
 import { addHero } from 'src/app/store/actions/hero.actions';
 
 @Component({
@@ -21,7 +20,6 @@ export class NewHeroComponent implements OnInit {
 
   constructor(
     private formBuiler: FormBuilder,
-    private heroesService: HeroesService,
     private router: Router,
     private store: Store) { }
 

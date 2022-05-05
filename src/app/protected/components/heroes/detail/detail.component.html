@@ -2,7 +2,7 @@
   *ngIf="heroDto$ | async as heroDto; then heroDtoTemplate; else loader"
 >
 </ng-container>
-
+<div id="entete"></div>
 <ng-template #heroDtoTemplate let-heroDto>
   <div class="card mx-auto mb-3" style="width: 50%; height: auto">
     <img
@@ -19,7 +19,7 @@
     </div>
     <div class="card-body">
       <h4
-        class="list-group-item text-uppercase fw-bold text-white bg-success text-center mx-auto"
+        class="list-group-item text-uppercase fw-bold text-white bg-success text-center mx-auto rounded-2"
       >
         Capacités :
       </h4>
@@ -29,6 +29,9 @@
           class="w-25 btn btn-outline-success mb-2"
         >
           Nouvelles capacités :
+        </button>
+        <button class="w-25 btn btn-outline-warning mb-2">
+          Modifier les capacités :
         </button>
         <button
           [routerLink]="['/protected/delete/ability', heroDto.id]"
@@ -43,7 +46,7 @@
         </li>
       </ul>
       <h4
-        class="list-group-item text-uppercase fw-bold text-center text-white mt-2 bg-info"
+        class="list-group-item text-uppercase fw-bold text-center text-white mt-2 bg-info rounded-2"
       >
         Techniques :
       </h4>
@@ -53,6 +56,9 @@
           class="w-25 btn btn-outline-info mb-2"
         >
           Nouvelles techniques :
+        </button>
+        <button class="w-25 btn btn-outline-warning mb-2">
+          Modifier les techniques :
         </button>
         <button
           (click)="onDeleteTechnique(heroDto.id)"
@@ -70,19 +76,20 @@
         </li>
       </ul>
     </div>
-    <div class="card-body w-100 d-flex justify-content-center">
-      <button class="w-50 btn btn-secondary" (click)="onReturn()">
+    <div class="card-body w-100 d-flex justify-content-around">
+      <button class="w-50 btn btn-outline-secondary" (click)="onReturn()">
         Retour
       </button>
-      <!-- <button
-        class="w-25 btn btn-secondary"
-        (click)="onDelete(heroDto.abilities.id)"
+      <button
+        class="w-25 btn btn-outline-warning"
+        [routerLink]="['/protected/update', heroDto.id]"
       >
-        Effacer une capacité
-      </button> -->
+        Modifier le héros
+      </button>
     </div>
   </div>
 </ng-template>
+<a href="#entete"><i class="fas fa-arrow-alt-circle-up"></i></a>
 <ng-template #loader let-heroDto>
   <img
     src="https://static.tutoandco.colas-delmas.fr/uploads/2017/10/loader.gif"

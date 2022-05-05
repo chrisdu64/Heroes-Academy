@@ -1,0 +1,77 @@
+<ng-container *ngIf="hero$ | async as hero; then heroTemplate; else loader">
+</ng-container>
+
+<ng-template #heroTemplate let-hero>
+  <div class="form-card">
+    <h2 class="text-center my-3">Mis à jour de votre héros</h2>
+    <form [formGroup]="updatedHeroForm">
+      <div class="form-group">
+        <label for="name">Nom du héros</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          [(ngModel)]="hero.name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          type="text"
+          id="description"
+          formControlName="description"
+          [(ngModel)]="hero.description"
+          rows="4"
+        ></textarea>
+      </div>
+      <div class="form-group">
+        <label for="myImg">URL de l'image</label>
+        <input
+          type="text"
+          id="myImg"
+          formControlName="myImg"
+          [(ngModel)]="hero.myImg"
+        />
+      </div>
+      <div class="w-100">
+        <button
+          class="btn btn-outline-dark d-block"
+          style="margin: 20px auto"
+          type="submit"
+          (click)="onSubmitUpdatedForm()"
+        >
+          Enregistrer
+        </button>
+        <!-- <button
+          class="btn btn-outline-dark d-block"
+          style="margin: 20px auto"
+          type="button"
+          (click)="setValue()"
+        >
+          pré remplir
+        </button> -->
+      </div>
+    </form>
+    <button
+      class="btn btn-warning text-white"
+      [routerLink]="['/protected/heroes/']"
+    >
+      Retour
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #loader let-hero>
+  <img
+    src="https://static.tutoandco.colas-delmas.fr/uploads/2017/10/loader.gif"
+    alt=""
+  />
+</ng-template>
+
+<!-- Pour visualiser ce que l'on tape dans le formulaire : -->
+
+<!-- <div class="hero-card" *ngIf="newHero$ | async as hero">
+    <h2>{{ hero.name | uppercase }}</h2>
+    <img class="w-100" [src]="hero.myImg" [alt]="hero.name" />
+    <p>{{ hero.description }}</p>
+  </div> -->

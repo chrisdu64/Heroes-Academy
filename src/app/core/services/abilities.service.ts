@@ -15,7 +15,6 @@ export class AbilitiesService {
 
   getAbilities$(): Observable<Ability[]> {
     return this.http.get<Ability[]>(environment.apiUrl + '/abilities').pipe(
-      tap(res => console.log("les habilités: ", res))
     );
   }
 

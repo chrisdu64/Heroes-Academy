@@ -50,6 +50,6 @@ export class NewTechniqueComponent implements OnInit {
       heroId: this.techniqueForm.value.heroId
     };
     this.store.dispatch(addTechnique({ newTechnique }));
-    this.router.navigateByUrl(`heroes/${this.heroId}`);
+    this.router.navigateByUrl(`protected/heroes/${this.heroId}`);
   }
 }

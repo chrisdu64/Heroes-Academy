@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { UpdateModule } from "./components/update/update.module";
 import { ProtectedComponent } from "./protected.component";
 
 const routes: Routes = [
@@ -10,6 +11,7 @@ const routes: Routes = [
             { path: 'delete', loadChildren: () => import('./components/delete/delete.module').then(m => m.DeleteModule) },
             { path: 'heroes', loadChildren: () => import('./components/heroes/heroes.module').then(m => m.HeroesModule) },
             { path: 'create', loadChildren: () => import('./components/new/new.module').then(m => m.NewModule) },
+            { path: 'update', loadChildren: () => import('./components/update/update.module').then(m => m.UpdateModule) },
             { path: '', redirectTo: 'heroes', pathMatch: 'full' },
         ]
     }

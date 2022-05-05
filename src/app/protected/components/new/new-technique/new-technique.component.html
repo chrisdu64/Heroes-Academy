@@ -1,9 +1,14 @@
-<div class="form-card">
+<div class="container">
   <h2 class="text-center my-3">Nouvelle technique :</h2>
   <form [formGroup]="techniqueForm">
     <div class="form-group">
-      <label for="name">Nom de la technique :</label>
-      <input type="text" id="name" formControlName="name" />
+      <label for="name">Nom de la nouvelle technique : </label>
+      <input
+        class="ms-2 rounded-2"
+        type="text"
+        id="name"
+        formControlName="name"
+      />
     </div>
     <div class="w-100">
       <button

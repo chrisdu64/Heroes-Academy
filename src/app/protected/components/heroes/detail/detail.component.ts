@@ -12,7 +12,6 @@ import { selectHeroDtoById } from 'src/app/store/selectors/hero-dto.selectors';
 })
 export class DetailComponent implements OnInit {
 
-  heroDto!: HeroDto | undefined;
   heroDto$!: Observable<HeroDto | undefined>;
   heroId!: number;
 
