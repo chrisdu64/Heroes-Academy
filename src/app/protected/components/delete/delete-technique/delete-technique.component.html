@@ -15,12 +15,17 @@
           *ngFor="let technique of techniques"
         >
           {{ technique.name }}
-          <button
-            class="btn btn-outline-danger"
-            (click)="onDeleteTechnique(technique.id)"
-          >
-            Supprimer
-          </button>
+          <div>
+            <button class="btn btn-outline-warning me-2">
+              Modifier la technique :
+            </button>
+            <button
+              class="btn btn-outline-danger ms-2"
+              (click)="onDeleteTechnique(technique.id)"
+            >
+              Supprimer
+            </button>
+          </div>
         </li>
       </ul>
     </div>

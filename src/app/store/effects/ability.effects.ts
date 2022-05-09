@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { Ability } from 'src/app/core/models/ability.interface';
 import { AbilitiesService } from 'src/app/core/services/abilities.service';
-import { addAbility, addAbilityError, deleteAbility, deleteAbilityError, deleteAbilitySuccess, getAbilities, getAbilitiesFailure, getAbilitiesSuccess } from '../actions/ability.actions';
+import { addAbility, addAbilityError, deleteAbility, deleteAbilityError, deleteAbilitySuccess, getAbilities, getAbilitiesFailure, getAbilitiesSuccess, updateAbility, updateAbilityFailure } from '../actions/ability.actions';
 
 
 
@@ -36,6 +36,13 @@ export class AbilityEffects {
     ))
   ))
 
+  updateAbility$ = createEffect(() => this.actions$.pipe(
+    ofType(updateAbility),
+    switchMap(action => this.abilitiesService.updateAbility$(action.updatedAbility).pipe(
+      map(_ => getAbilities()),
+      catchError(() => of(updateAbilityFailure)),
+    )),
+  ));
   constructor(
     private actions$: Actions,
     private abilitiesService: AbilitiesService,) { }

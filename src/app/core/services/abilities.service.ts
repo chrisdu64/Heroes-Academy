@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Ability } from '../models/ability.interface';
@@ -25,32 +25,14 @@ export class AbilitiesService {
     )
   }
 
+  updateAbility$(formValue: { id: number, name: string, heroId: number }): Observable<Ability> {
+    return this.getAbilities$().pipe(
+      map(() => formValue),
+      switchMap(updatedAbility => this.http.patch<Ability>(environment.apiUrl + `/abilities/${formValue.id}`, updatedAbility))
+    )
+  }
+
   deleteAbility$(id: number): Observable<Ability[]> {
     return this.http.delete<any>(environment.apiUrl + `/abilities/${id}`)
   }
-
-  getAbilitiesByAbilityName$(abilityName: string): Observable<Ability[]> {
-
-    return this.getAbilities$().pipe(
-      map(abilities => abilities.filter(
-        ability => ability.name.toLowerCase().includes(abilityName.toLowerCase())
-      )
-      ));
-  }
-
 }
-  // deleteAbility$(heroId: number): Observable<Ability> {
-  //   return this.getAbilities$().pipe(
-  //     map(abilities => [...abilities]. )
-  //   )
-  //  return this.http.delete<Ability>(environment.apiUrl + "/abilities?heroId=" + heroId)
-  // }
-
-  // lengthAbilities(heroId: number): number {
-  //   return this.getAbilitiesByHeroId(heroId).length;
-  // }
-
-
-  // getAbilities(): Ability[] {
-  //   return this.abilities;
-  // }

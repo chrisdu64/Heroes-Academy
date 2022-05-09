@@ -47,7 +47,8 @@ export class NewAbilityComponent implements OnInit {
 
     let newAbility: Ability = {
       name: this.abilityForm.value.name,
-      heroId: this.abilityForm.value.heroId
+      heroId: this.abilityForm.value.heroId,
+      id: this.abilityForm.value.id
     };
 
     this.store.dispatch(addAbility({ newAbility }));

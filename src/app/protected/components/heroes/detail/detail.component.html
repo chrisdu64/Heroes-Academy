@@ -30,14 +30,12 @@
         >
           Nouvelles capacités :
         </button>
-        <button class="w-25 btn btn-outline-warning mb-2">
-          Modifier les capacités :
-        </button>
+
         <button
           [routerLink]="['/protected/delete/ability', heroDto.id]"
           class="w-25 btn btn-outline-danger mb-2"
         >
-          Supprimer une capacité :
+          Modifier ou Supprimer une capacité :
         </button>
       </div>
       <ul class="list-group">
@@ -57,14 +55,12 @@
         >
           Nouvelles techniques :
         </button>
-        <button class="w-25 btn btn-outline-warning mb-2">
-          Modifier les techniques :
-        </button>
+
         <button
           (click)="onDeleteTechnique(heroDto.id)"
           class="w-25 btn btn-outline-danger mb-2"
         >
-          Supprimer une technique :
+          Modifier ou supprimer une technique :
         </button>
       </div>
       <ul class="list-group">

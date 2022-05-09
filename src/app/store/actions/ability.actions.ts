@@ -23,7 +23,15 @@ export const addAbilityError = createAction(
   '[Protected] Add Ability Error',
   props<{ error: HttpErrorResponse }>()
 );
-
+// Update
+export const updateAbility = createAction(
+  '[Protected] Update Ability',
+  props<{ updatedAbility: Ability }>()
+);
+export const updateAbilityFailure = createAction(
+  '[Protected] Update Ability Failure',
+  props<{ failureResponse: HttpErrorResponse }>()
+);
 // Supprimer une capacité:
 export const deleteAbility = createAction(
   '[Protected] Delete Ability',

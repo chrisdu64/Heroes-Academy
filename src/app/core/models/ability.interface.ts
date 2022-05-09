@@ -1,5 +1,5 @@
 export interface Ability {
-        id?: number;
+        id: number;
         heroId: number;
         name: string;
 }

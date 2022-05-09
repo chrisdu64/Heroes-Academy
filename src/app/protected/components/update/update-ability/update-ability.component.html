@@ -1,0 +1,41 @@
+<ng-container
+  *ngIf="updatedForm$ | async as updatedForm; then abilityTemplate; else loader"
+>
+</ng-container>
+
+<ng-template #abilityTemplate let-updatedForm>
+  <div class="container">
+    <h2 class="text-center my-3">Modifier la capacité :</h2>
+
+    <form [formGroup]="updatedAbilityForm">
+      <div class="form-group">
+        <label for="name">Nom de la capacité : </label>
+        <input class="ms-2" type="text" id="name" formControlName="name" />
+      </div>
+      <div class="w-100">
+        <button
+          class="btn btn-outline-dark d-block"
+          style="margin: 20px auto"
+          type="submit"
+          (click)="onSubmitUpdatedAbilityForm()"
+        >
+          Enregistrer
+        </button>
+      </div>
+    </form>
+
+    <button
+      class="btn btn-warning text-white"
+      [routerLink]="['/protected/heroes/', updatedForm.heroId]"
+    >
+      Retour sur le héros
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #loader let-hero>
+  <img
+    src="https://static.tutoandco.colas-delmas.fr/uploads/2017/10/loader.gif"
+    alt=""
+  />
+</ng-template>
