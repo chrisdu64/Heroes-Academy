@@ -47,7 +47,8 @@ export class NewTechniqueComponent implements OnInit {
   onSubmitTechniqueForm(): void {
     let newTechnique: Technique = {
       name: this.techniqueForm.value.name,
-      heroId: this.techniqueForm.value.heroId
+      heroId: this.techniqueForm.value.heroId,
+      id: this.techniqueForm.value.id
     };
     this.store.dispatch(addTechnique({ newTechnique }));
     this.router.navigateByUrl(`protected/heroes/${this.heroId}`);

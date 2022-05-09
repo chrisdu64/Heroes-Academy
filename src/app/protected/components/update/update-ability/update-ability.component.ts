@@ -6,7 +6,11 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Ability } from 'src/app/core/models/ability.interface';
 import { updateAbility } from 'src/app/store/actions/ability.actions';
+<<<<<<< Updated upstream
 import { selectAbilitiesForUpdateById } from 'src/app/store/selectors/ability.selectors';
+=======
+import { selectAbilitiesByIdForUpdate } from 'src/app/store/selectors/ability.selectors';
+>>>>>>> Stashed changes
 
 @Component({
   selector: 'app-update-ability',
@@ -29,7 +33,7 @@ export class UpdateAbilityComponent implements OnInit {
   ngOnInit(): void {
     this.abilityId = +this.route.snapshot.params['id'];
 
-    this.updatedForm$ = this.store.select(selectAbilitiesForUpdateById(this.abilityId)).pipe(
+    this.updatedForm$ = this.store.select(selectAbilitiesByIdForUpdate(this.abilityId)).pipe(
       map(ability => this.updatedAbilityForm = this.fb.group({
         name: [ability?.name, Validators.required],
         id: this.abilityId,

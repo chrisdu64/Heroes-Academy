@@ -7,9 +7,14 @@ export const selectTechniquesState = createFeatureSelector<Technique[]>(techniqu
 export const selectTechniques = createSelector(
     selectTechniquesState,
     techniques => techniques
-)
+);
 
 export const selectTechniqueByHeroId = (heroId: number) => createSelector(
     selectTechniques,
     techniques => techniques.filter(technique => technique.heroId === heroId)
-)
+);
+
+export const selectTechniquesByIdForUpdate = (id: number) => createSelector(
+    selectTechniques,
+    techniques => techniques.find(technique => technique.id === id)
+);

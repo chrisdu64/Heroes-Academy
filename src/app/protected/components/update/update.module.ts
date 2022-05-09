@@ -16,7 +16,8 @@ import { UpdateTechniqueComponent } from './update-technique/update-technique.co
   ],
   exports: [
     UpdateHeroComponent,
-    UpdateAbilityComponent
+    UpdateAbilityComponent,
+    UpdateTechniqueComponent
   ]
 })
 export class UpdateModule { }

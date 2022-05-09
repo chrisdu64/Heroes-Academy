@@ -14,6 +14,7 @@ export const getTechniquesFailure = createAction(
   props<{ failureResponse: HttpErrorResponse }>()
 );
 
+//  Ajout d'une technique
 export const addTechnique = createAction(
   '[Technique] Add Technique',
   props<{ newTechnique: Technique }>()
@@ -21,7 +22,17 @@ export const addTechnique = createAction(
 export const addTechniqueFailure = createAction(
   '[Technique] Add Technique Failure',
   props<{ error: HttpErrorResponse }>()
-)
+);
+
+// Update d'une technique
+export const updateTechnique = createAction(
+  '[Technique] Update Technique',
+  props<{ updatedTechnique: Technique }>()
+);
+export const updateTechniqueFailure = createAction(
+  '[Technique] Update Technique Failure',
+  props<{ failureResponse: HttpErrorResponse }>()
+);
 
 export const deleteTechnique = createAction(
   '[Technique] Delete Technique',

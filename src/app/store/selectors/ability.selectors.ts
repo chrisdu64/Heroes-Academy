@@ -14,7 +14,7 @@ export const selectAbilitiesByHeroId = (heroId: number) => createSelector(
     abilities => abilities.filter(ability => ability.heroId === heroId)
 );
 
-export const selectAbilitiesForUpdateById = (id: number) => createSelector(
+export const selectAbilitiesByIdForUpdate = (id: number) => createSelector(
     selectAbilities,
     abilities => abilities.find(ability => ability.id === id)
 );

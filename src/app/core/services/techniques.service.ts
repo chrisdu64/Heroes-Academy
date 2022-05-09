@@ -24,6 +24,14 @@ export class TechniquesService {
     )
   }
 
+  updateTechnique$(formValue: { id: number, name: string, heroId: number }): Observable<Technique> {
+    return this.getTechniques$().pipe(
+      map(() => formValue),
+      switchMap(updatedTechnique => this.http.patch<Technique>(environment.apiUrl + `/techniques/${formValue.id}`, updatedTechnique))
+    )
+  }
+
+
   deleteTechnique$(id: number): Observable<Technique[]> {
     return this.http.delete<any>(environment.apiUrl + `/techniques/${id}`)
   }
