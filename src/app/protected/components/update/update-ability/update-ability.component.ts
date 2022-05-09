@@ -6,11 +6,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Ability } from 'src/app/core/models/ability.interface';
 import { updateAbility } from 'src/app/store/actions/ability.actions';
-<<<<<<< Updated upstream
-import { selectAbilitiesForUpdateById } from 'src/app/store/selectors/ability.selectors';
-=======
 import { selectAbilitiesByIdForUpdate } from 'src/app/store/selectors/ability.selectors';
->>>>>>> Stashed changes
 
 @Component({
   selector: 'app-update-ability',
