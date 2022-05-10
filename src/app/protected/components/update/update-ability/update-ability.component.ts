@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Ability } from 'src/app/core/models/ability.interface';
 import { updateAbility } from 'src/app/store/actions/ability.actions';
-import { selectAbilitiesByIdForUpdate } from 'src/app/store/selectors/ability.selectors';
+import { selectAbilitiesByIdForUpdate, selectAbilityValuesForUpdate } from 'src/app/store/selectors/ability.selectors';
 
 @Component({
   selector: 'app-update-ability',
@@ -28,6 +28,14 @@ export class UpdateAbilityComponent implements OnInit {
 
   ngOnInit(): void {
     this.abilityId = +this.route.snapshot.params['id'];
+
+    // this.updatedForm$ = this.store.select(selectAbilityValuesForUpdate(this.abilityId)).pipe(
+    //   tap(res => console.log('resultat', res)
+    //   ),
+    //   map(ability => this.updatedAbilityForm = this.fb.group({ ability })),
+    //   tap(res => console.log('resultat 2', res))
+    // )
+
 
     this.updatedForm$ = this.store.select(selectAbilitiesByIdForUpdate(this.abilityId)).pipe(
       map(ability => this.updatedAbilityForm = this.fb.group({

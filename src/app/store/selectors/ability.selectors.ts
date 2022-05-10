@@ -22,4 +22,11 @@ export const selectAbilitiesByIdForUpdate = (id: number) => createSelector(
 export const selectAbilitiesCountForId = createSelector(
     selectAbilities,
     abilities => abilities.length + 1
-)
+);
+
+export const selectAbilityValuesForUpdate = (id: number) => createSelector(
+    selectAbilities,
+    abilities => abilities.map(ability => ({ name: ability.name, id: ability.id, heroId: ability.heroId })).filter(
+        ability => ability.id === id
+    )
+);
