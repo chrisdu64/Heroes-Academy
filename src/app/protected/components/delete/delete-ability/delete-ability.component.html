@@ -17,12 +17,6 @@
           {{ ability.name }}
           <div>
             <button
-              class="btn btn-outline-warning me-2"
-              [routerLink]="['/protected/update/ability', ability.id]"
-            >
-              Modifier la capacité :
-            </button>
-            <button
               class="btn btn-outline-danger ms-2"
               (click)="onDeleteAbility(ability.id)"
             >

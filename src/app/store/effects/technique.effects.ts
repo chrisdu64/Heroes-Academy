@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { TechniquesService } from 'src/app/core/services/techniques.service';
 import { addTechnique, addTechniqueFailure, deleteTechnique, DeleteTechniqueError, deleteTechniqueSuccess, getTechniques, getTechniquesFailure, getTechniquesSuccess, updateTechnique, updateTechniqueFailure } from '../actions/technique.actions';
 
@@ -35,7 +35,7 @@ export class TechniqueEffects {
 
   updateTechnique$ = createEffect(() => this.actions$.pipe(
     ofType(updateTechnique),
-    switchMap(action => this.techniquesService.updateTechnique$(action.updatedTechnique).pipe(
+    mergeMap(action => this.techniquesService.updateTechnique$(action.updatedTechnique).pipe(
       map(_ => getTechniques()),
       catchError(() => of(updateTechniqueFailure)),
     )),

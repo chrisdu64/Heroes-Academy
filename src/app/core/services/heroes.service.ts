@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Hero } from '../models/hero.interface';
 
@@ -16,21 +15,11 @@ export class HeroesService {
   }
 
   addHero$(formValue: { name: string, description: string, myImg: string }): Observable<Hero> {
-
-    return this.getHeroes$().pipe(
-      map(() => formValue),
-      switchMap(newHero => this.http.post<Hero>(environment.apiUrl + "/heroes/", newHero)),
-    )
+    return this.http.post<Hero>(environment.apiUrl + "/heroes/", formValue)
   }
-  // updateHero$(hero: Hero) {
-  //   const heroData = { [hero.id]: { name: hero.name, description: hero.description, myImg: hero.myImg }, };
-  //   return this.http.patch(environment.apiUrl + `/heroes/${hero.id}`, heroData)
-  // }
+
   updateHero$(formValue: { id: number, name: string, description: string, myImg: string }): Observable<Hero> {
-    return this.getHeroes$().pipe(
-      map(() => formValue),
-      switchMap(updatedHero => this.http.patch<Hero>(environment.apiUrl + `/heroes/${formValue.id}`, updatedHero)),
-    )
+    return this.http.patch<Hero>(environment.apiUrl + `/heroes/${formValue.id}`, formValue)
   }
 
   deleteHero$(idHero: number): Observable<Hero[]> {

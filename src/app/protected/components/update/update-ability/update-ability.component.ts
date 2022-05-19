@@ -29,14 +29,6 @@ export class UpdateAbilityComponent implements OnInit {
   ngOnInit(): void {
     this.abilityId = +this.route.snapshot.params['id'];
 
-    // this.updatedForm$ = this.store.select(selectAbilityValuesForUpdate(this.abilityId)).pipe(
-    //   tap(res => console.log('resultat', res)
-    //   ),
-    //   map(ability => this.updatedAbilityForm = this.fb.group({ ability })),
-    //   tap(res => console.log('resultat 2', res))
-    // )
-
-
     this.updatedForm$ = this.store.select(selectAbilitiesByIdForUpdate(this.abilityId)).pipe(
       map(ability => this.updatedAbilityForm = this.fb.group({
         name: [ability?.name, Validators.required],

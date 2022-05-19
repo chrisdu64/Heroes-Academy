@@ -80,7 +80,23 @@ export const selectHeroesDtoByTechniqueName = (techniqueName: string) => createS
     )
 )
 
-export const test = () => {
-    console.log("test");
+export const selectAbilityIdToHeroDto = (id: number) => createSelector(
+    selectHeroesDto,
+    heroesDto => {
+        let abilityId = 0;
+        heroesDto.forEach(
+            heroDto => {
+                heroDto.abilities.forEach(
+                    ability => {
+                        if (ability.heroId === id) {
+                            abilityId === ability.id
+                            return;
+                        }
+                    }
+                )
+            }
+        )
+        return abilityId
+    },
+)
 
-}

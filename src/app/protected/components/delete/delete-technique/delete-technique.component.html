@@ -17,12 +17,6 @@
           {{ technique.name }}
           <div>
             <button
-              class="btn btn-outline-warning me-2"
-              [routerLink]="['/protected/update/technique', technique.id]"
-            >
-              Modifier la technique :
-            </button>
-            <button
               class="btn btn-outline-danger ms-2"
               (click)="onDeleteTechnique(technique.id)"
             >

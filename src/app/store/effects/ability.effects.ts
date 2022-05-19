@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
-import { Ability } from 'src/app/core/models/ability.interface';
+import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { AbilitiesService } from 'src/app/core/services/abilities.service';
 import { addAbility, addAbilityError, deleteAbility, deleteAbilityError, deleteAbilitySuccess, getAbilities, getAbilitiesFailure, getAbilitiesSuccess, updateAbility, updateAbilityFailure } from '../actions/ability.actions';
 
@@ -38,7 +36,7 @@ export class AbilityEffects {
 
   updateAbility$ = createEffect(() => this.actions$.pipe(
     ofType(updateAbility),
-    switchMap(action => this.abilitiesService.updateAbility$(action.updatedAbility).pipe(
+    mergeMap(action => this.abilitiesService.updateAbility$(action.updatedAbility).pipe(
       map(_ => getAbilities()),
       catchError(() => of(updateAbilityFailure)),
     )),

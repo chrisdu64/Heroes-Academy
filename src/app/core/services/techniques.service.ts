@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Technique } from '../models/technique.interface';
 
@@ -18,22 +17,14 @@ export class TechniquesService {
   }
 
   addTechnique$(formValue: { name: string, heroId: number }): Observable<Technique> {
-    return this.getTechniques$().pipe(
-      map(() => formValue),
-      switchMap(newTechnique => this.http.post<Technique>(environment.apiUrl + "/techniques/", newTechnique))
-    )
+    return this.http.post<Technique>(environment.apiUrl + "/techniques/", formValue)
   }
 
   updateTechnique$(formValue: { id: number, name: string, heroId: number }): Observable<Technique> {
-    return this.getTechniques$().pipe(
-      map(() => formValue),
-      switchMap(updatedTechnique => this.http.patch<Technique>(environment.apiUrl + `/techniques/${formValue.id}`, updatedTechnique))
-    )
+    return this.http.patch<Technique>(environment.apiUrl + `/techniques/${formValue.id}`, formValue)
   }
-
 
   deleteTechnique$(id: number): Observable<Technique[]> {
     return this.http.delete<any>(environment.apiUrl + `/techniques/${id}`)
   }
-
 }

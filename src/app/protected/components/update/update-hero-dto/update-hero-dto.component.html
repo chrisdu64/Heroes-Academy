@@ -1,0 +1,151 @@
+<ng-container
+  *ngIf="updatedForm$ | async as updatedForm; then heroTemplate; else loader"
+>
+</ng-container>
+
+<ng-template #heroTemplate let-updatedForm>
+  <div
+    class="form-card"
+    [ngStyle]="{ 'background-image': 'url(' + heroDtoForm.value.myImg + ')' }"
+  >
+    <h2 class="text-white text-decoration-underline fw-bold text-center my-3">
+      Mise à jour de votre héros
+    </h2>
+    <h4
+      class="list-group-item text-uppercase fw-bold text-white bg-secondary text-center mx-auto rounded-2"
+      style="width: 80%"
+    >
+      Votre héros
+    </h4>
+    <form [formGroup]="heroDtoForm">
+      <div class="form-group w-75 mx-auto justify-content-between">
+        <label class="text-white fw-bold" for="name">Nom du héros</label>
+        <input
+          class="bg-opacity-25 bg-dark text-white"
+          type="text"
+          id="name"
+          formControlName="name"
+        />
+      </div>
+      <div class="form-group w-75 mx-auto justify-content-between">
+        <label class="text-white fw-bold" for="description">Description</label>
+        <textarea
+          class="bg-opacity-25 bg-dark text-white"
+          type="text"
+          id="description"
+          formControlName="description"
+          rows="4"
+        ></textarea>
+      </div>
+      <div class="form-group w-75 mx-auto justify-content-between">
+        <label class="text-white fw-bold" for="myImg">URL de l'image</label>
+        <input
+          class="bg-opacity-25 bg-dark text-white"
+          type="text"
+          id="myImg"
+          formControlName="myImg"
+        />
+      </div>
+
+      <!-- ability -->
+
+      <h4
+        class="list-group-item text-uppercase fw-bold text-white bg-success text-center mx-auto rounded-2"
+        style="width: 80%"
+      >
+        Capacités :
+      </h4>
+      <ng-container formArrayName="abilities">
+        <ng-container
+          *ngFor="let abilityForm of abilities.controls; index as i"
+        >
+          <div
+            class="form-group w-75 mx-auto justify-content-between"
+            [formGroupName]="i"
+          >
+            <label
+              class="text-white fw-bold"
+              for="name"
+              *ngIf="i + 1 > 1; else elseAbilityBlock"
+              >{{ i + 1 }}ème capacité :
+            </label>
+
+            <ng-template #elseAbilityBlock
+              ><label class="text-white fw-bold" for="name"
+                >{{ i + 1 }}ère capacité :
+              </label></ng-template
+            >
+            <input
+              class="bg-opacity-25 bg-dark text-white"
+              type="text"
+              id="name"
+              formControlName="name"
+            />
+          </div>
+        </ng-container>
+      </ng-container>
+
+      <!-- technique -->
+
+      <h4
+        class="list-group-item text-uppercase fw-bold text-center text-white mt-2 bg-info rounded-2 mx-auto"
+        style="width: 80%"
+      >
+        Techniques :
+      </h4>
+      <ng-container formArrayName="techniques">
+        <ng-container
+          *ngFor="let techniqueForm of techniques.controls; index as i"
+        >
+          <div
+            class="form-group w-75 mx-auto justify-content-between"
+            [formGroupName]="i"
+          >
+            <label
+              class="text-white fw-bold"
+              for="name"
+              *ngIf="i + 1 > 1; else elseTechniqueBlock"
+              >{{ i + 1 }}ème technique :
+            </label>
+
+            <ng-template #elseTechniqueBlock
+              ><label class="text-white fw-bold" for="name"
+                >{{ i + 1 }}ère technique :
+              </label></ng-template
+            >
+            <input
+              class="bg-opacity-25 bg-dark text-white"
+              type="text"
+              id="name"
+              formControlName="name"
+            />
+          </div>
+        </ng-container>
+      </ng-container>
+
+      <div class="w-100">
+        <button
+          class="btn btn-outline-dark text-white fw-bold d-block"
+          style="margin: 20px auto"
+          type="submit"
+          (click)="onSubmitUpdatedForm()"
+        >
+          Enregistrer
+        </button>
+      </div>
+    </form>
+    <button
+      class="btn btn-warning text-white"
+      [routerLink]="['/protected/heroes/', updatedForm.value.id]"
+    >
+      Retour
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #loader let-hero>
+  <img
+    src="https://static.tutoandco.colas-delmas.fr/uploads/2017/10/loader.gif"
+    alt=""
+  />
+</ng-template>

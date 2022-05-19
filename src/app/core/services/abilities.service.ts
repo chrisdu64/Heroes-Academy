@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, pipe } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Ability } from '../models/ability.interface';
 
@@ -19,17 +18,12 @@ export class AbilitiesService {
   }
 
   addAbility$(formValue: { name: string, heroId: number }): Observable<Ability> {
-    return this.getAbilities$().pipe(
-      map(() => formValue),
-      switchMap(newAbility => this.http.post<Ability>(environment.apiUrl + "/abilities/", newAbility))
-    )
+    return this.http.post<Ability>(environment.apiUrl + "/abilities/", formValue)
+
   }
 
   updateAbility$(formValue: { id: number, name: string, heroId: number }): Observable<Ability> {
-    return this.getAbilities$().pipe(
-      map(() => formValue),
-      switchMap(updatedAbility => this.http.patch<Ability>(environment.apiUrl + `/abilities/${formValue.id}`, updatedAbility))
-    )
+    return this.http.patch<Ability>(environment.apiUrl + `/abilities/${formValue.id}`, formValue);
   }
 
   deleteAbility$(id: number): Observable<Ability[]> {

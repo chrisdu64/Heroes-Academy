@@ -1,0 +1,29 @@
+.form-card {
+  box-sizing: content-box;
+  width: 70%;
+  margin: 40px auto;
+  padding: 10px 30px;
+  box-shadow: rgb(114, 114, 114) 4px 4px 20px;
+  object-fit: cover;
+  background: no-repeat center;
+  display: block;
+  max-width: 100%;
+  border: solid 1px rgb(0, 0, 0);
+}
+h2,
+label {
+  color: #000000;
+  text-shadow: 2px 2px 0 #4e4e4e, 4px 4px 0 #9c9c9c;
+}
+.form-group {
+  margin: 10px auto;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+input,
+textarea {
+  width: 75%;
+}

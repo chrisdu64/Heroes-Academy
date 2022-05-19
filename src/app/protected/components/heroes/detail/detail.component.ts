@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faArrowAltCircleUp, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { HeroDto } from 'src/app/core/models/heroDto.interface';
@@ -14,6 +15,8 @@ export class DetailComponent implements OnInit {
 
   heroDto$!: Observable<HeroDto | undefined>;
   heroId!: number;
+  faArrowAltCircleUp: IconDefinition = faArrowAltCircleUp;
+
 
   constructor(
     private route: ActivatedRoute,

@@ -29,9 +29,6 @@ export class UpdateHeroComponent implements OnInit {
   ngOnInit(): void {
     this.heroId = +this.route.snapshot.params['id'];
 
-    // this.hero$ = this.store.select(selectHeroById(this.heroId)).pipe(
-    //   tap(res => console.log("resultat:", res))
-    // );
 
     this.updatedForm$ = this.store.select(selectHeroById(this.heroId)).pipe(
       map(hero => this.updatedHeroForm = this.formBuiler.group({

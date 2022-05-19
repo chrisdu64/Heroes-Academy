@@ -18,6 +18,10 @@ export const selectAbilitiesByIdForUpdate = (id: number) => createSelector(
     selectAbilities,
     abilities => abilities.find(ability => ability.id === id)
 );
+export const selectAbilityByHeroIdForUpdate = (heroId: number) => createSelector(
+    selectAbilities,
+    abilities => abilities.find(ability => ability.heroId === heroId)
+);
 
 export const selectAbilitiesCountForId = createSelector(
     selectAbilities,
@@ -30,3 +34,18 @@ export const selectAbilityValuesForUpdate = (id: number) => createSelector(
         ability => ability.id === id
     )
 );
+export const selectAbilityId = (id: number) => createSelector(
+    selectAbilities,
+    abilities => {
+        let abilityId = 0
+        abilities.forEach(
+            ability => {
+                if (ability.heroId === id) {
+                    abilityId = ability.id
+                    return;
+                }
+            }
+        )
+        return abilityId
+    }
+)

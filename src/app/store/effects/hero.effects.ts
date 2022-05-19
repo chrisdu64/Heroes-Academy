@@ -3,9 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { HeroesService } from 'src/app/core/services/heroes.service';
-import { addHero, addHeroFailure, DeleteHero, DeleteHeroError, DeleteHeroSuccess, getHeroes, getHeroesFailure, getHeroesSuccess, updateHero, updateHeroFailure, updateHeroSuccess } from '../actions/hero.actions';
-import { selectAbilitiesCountForId } from '../selectors/ability.selectors';
-import { selectHeroesCountForId } from '../selectors/hero.selectors';
+import { addHero, addHeroFailure, DeleteHero, DeleteHeroError, DeleteHeroSuccess, getHeroes, getHeroesFailure, getHeroesSuccess, updateHero, updateHeroFailure } from '../actions/hero.actions';
 
 
 
@@ -35,14 +33,6 @@ export class HeroEffects {
       catchError(() => of(addHeroFailure)),
     )),
   ));
-
-  // updateHero$ = createEffect(() => this.actions$.pipe(
-  //   ofType(updateHero),
-  //   switchMap(action => this.heroesService.updateHero$(action.updatedHero).pipe(
-  //     map((data) => { return updateHeroSuccess({ updatedHero: action.updatedHero }) }),
-  //     catchError(() => of(updateHeroFailure)),
-  //   )),
-  // ));
 
   updateHero$ = createEffect(() => this.actions$.pipe(
     ofType(updateHero),

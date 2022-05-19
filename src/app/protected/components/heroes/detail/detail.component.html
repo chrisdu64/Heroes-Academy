@@ -35,13 +35,22 @@
           [routerLink]="['/protected/delete/ability', heroDto.id]"
           class="w-25 btn btn-outline-danger mb-2"
         >
-          Modifier ou Supprimer une capacité :
+          Supprimer une capacité :
         </button>
       </div>
       <ul class="list-group">
         <li class="list-group-item" *ngFor="let abilities of heroDto.abilities">
           {{ abilities.name }}
         </li>
+        <!-- pour faire un menu déroulant -->
+        <!-- <select required>
+          <option
+            *ngFor="let abilities of heroDto.abilities"
+            [value]="abilities"
+          >
+            {{ abilities.name }}
+          </option>
+        </select> -->
       </ul>
       <h4
         class="list-group-item text-uppercase fw-bold text-center text-white mt-2 bg-info rounded-2"
@@ -60,7 +69,7 @@
           (click)="onDeleteTechnique(heroDto.id)"
           class="w-25 btn btn-outline-danger mb-2"
         >
-          Modifier ou supprimer une technique :
+          Supprimer une technique :
         </button>
       </div>
       <ul class="list-group">
@@ -85,8 +94,9 @@
     </div>
   </div>
 </ng-template>
-<a href="#entete"><i class="fa-solid fa-circle-up"></i></a>
-<i class="fa-solid fa-arrow-down-up-across-line"></i>
+<fa-icon [icon]="faArrowAltCircleUp"></fa-icon>
+<i class="fas fa-arrow-alt-circle-up"><a href="#entete"></a></i>
+
 <ng-template #loader let-heroDto>
   <img
     src="https://static.tutoandco.colas-delmas.fr/uploads/2017/10/loader.gif"
