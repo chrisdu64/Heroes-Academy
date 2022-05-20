@@ -22,8 +22,6 @@ export class UpdateHeroDtoComponent implements OnInit {
   updatedForm$!: Observable<FormGroup>;
   urlVerify!: RegExp;
   heroDtoForm!: FormGroup;
-  bGI!: string;
-  bGN!: string;
 
   constructor(
     private fb: FormBuilder,
@@ -33,8 +31,6 @@ export class UpdateHeroDtoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.bGI = "this.heroDtoForm.value.myImg";
-    this.bGN = "black";
     this.heroId = +this.route.snapshot.params['id'];
     this.urlVerify = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/;
 
