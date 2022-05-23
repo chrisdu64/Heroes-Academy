@@ -2,9 +2,8 @@
   *ngIf="heroDto$ | async as heroDto; then heroDtoTemplate; else loader"
 >
 </ng-container>
-<div id="entete"></div>
 <ng-template #heroDtoTemplate let-heroDto>
-  <div class="card mx-auto mb-3" style="width: 50%; height: auto">
+  <div id="entete" class="card mx-auto mb-3" style="width: 50%; height: auto">
     <img
       [src]="heroDto.myImg"
       class="card-img-top"
@@ -93,9 +92,11 @@
       </button>
     </div>
   </div>
+  <a href="#entete"
+    ><fa-icon [icon]="faArrowAltCircleUp"></fa-icon>
+    <i class="fas fa-arrow-alt-circle-up"></i
+  ></a>
 </ng-template>
-<fa-icon [icon]="faArrowAltCircleUp"></fa-icon>
-<i class="fas fa-arrow-alt-circle-up"><a href="#entete"></a></i>
 
 <ng-template #loader let-heroDto>
   <img
